@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.7)
+project(abstractVM)
+file(STRINGS sources.mk SOURCE_FILES)
+file(GLOB_RECURSE INCLUDE_FILES include/*)
+include_directories(include)
+set(CMAKE_CXX_STANDARD 11)
+add_executable(abstractVM ${SOURCE_FILES})
