@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <AbstractVM.hh>
+#include <fstream>
 #include "Parsing.hh"
 
 Parsing::Parsing(int fd, AbstractVM *vm) {
@@ -19,7 +20,10 @@ Parsing::Parsing(int fd, AbstractVM *vm) {
 }
 
 Parsing::Parsing(char *filename, AbstractVM *vm) {
-    std::cout << "(filename)" << std::endl;
+    std::ifstream f(filename);
+
+    if (f.is_open())
+        std::cout << f.rdbuf();
     (void)filename;
     (void)vm;
 }
