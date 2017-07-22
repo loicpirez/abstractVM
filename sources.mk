@@ -1,0 +1,13 @@
+main.cpp
+src/Parser.cpp
+src/Machine.cpp
+src/Int8.cpp
+src/Int16.cpp
+src/Int32.cpp
+src/Float.cpp
+src/Double.cpp
+src/BigDecimal.cpp
+src/Exceptions.cpp
+src/Factory.cpp
+src/Execution.cpp
+src/Instructions.cpp

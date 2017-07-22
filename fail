@@ -1,0 +1,31 @@
+		   ;; dfdsgd
+push            int32(42)                  
+push int32(42) 					; aaaaahhhh
+	push int32(33)
+  ; La stack contient 2 elem
+
+add
+; Les 2 ope sont additionnés puis supprimés et le résultat
+; est mis sur la stack
+
+push float(44.55)
+; La stack contient 2 elem: le resultat de
+; l'addition et ce float
+
+mul
+; Les 2 ope sont multipliés
+
+push double(42.42)
+push Int32(42)
+
+dump
+; Affiche le contenu de la stack
+
+pop
+; Pop la valeur au sommet de la stack
+
+assert double(42.42)
+; Assert la value
+
+; Fail parce qu'il n'y a pas d'exit
+
