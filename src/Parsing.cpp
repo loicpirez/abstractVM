@@ -20,10 +20,7 @@ Parsing::Parsing(int fd, AbstractVM *vm) {
 }
 
 Parsing::Parsing(char *filename, AbstractVM *vm) {
-    std::ifstream f(filename);
-
-    if (f.is_open())
-        std::cout << f.rdbuf();
+    std::cout << "(filename)" << std::endl;
     (void)filename;
     (void)vm;
 }
