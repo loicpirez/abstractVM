@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Sat Jul 22 17:14:27 2017 Julien Leleu
-// Last update Sun Jul 23 16:58:52 2017 Julien Leleu
+// Last update Sun Jul 23 19:32:28 2017 Julien Leleu
 //
 
 #include <iostream>
@@ -67,26 +67,115 @@ std::list<IOperand *> Instructions::dump(std::list<IOperand *> stack) {
 }
 
 std::list<IOperand *> Instructions::add(std::list<IOperand *> stack) {
-    return (stack);
+  try {
+    if (stack.size() < 2)
+      throw new ExceptionStack;
+    IOperand *i = stack.front();
+    stack.pop_front();
+    IOperand *k = stack.front();
+    stack.pop_front();
+    IOperand *ret = *i + *k;
+    stack.push_front(ret);
+    delete i;
+    delete k;
+  } catch (ExceptionStack *e) {
+    std::cout << e->what() << std::endl;
+    std::exit(84);
+  }
+  return (stack);
 }
 
 std::list<IOperand *> Instructions::sub(std::list<IOperand *> stack) {
-    return (stack);
+  try {
+    if (stack.size() < 2)
+      throw new ExceptionStack;
+    IOperand *i = stack.front();
+    stack.pop_front();
+    IOperand *k = stack.front();
+    stack.pop_front();
+    IOperand *ret = *i - *k;
+    stack.push_front(ret);
+    delete i;
+    delete k;
+  } catch (ExceptionStack *e) {
+    std::cout << e->what() << std::endl;
+    std::exit(84);
+  }
+  return (stack);
 }
 
 std::list<IOperand *> Instructions::mul(std::list<IOperand *> stack) {
-    return (stack);
+  try {
+    if (stack.size() < 2)
+      throw new ExceptionStack;
+    IOperand *i = stack.front();
+    stack.pop_front();
+    IOperand *k = stack.front();
+    stack.pop_front();
+    IOperand *ret = *i * *k;
+    stack.push_front(ret);
+    delete i;
+    delete k;
+  } catch (ExceptionStack *e) {
+    std::cout << e->what() << std::endl;
+    std::exit(84);
+  }
+  return (stack);
 }
 
 std::list<IOperand *> Instructions::div(std::list<IOperand *> stack) {
-    return (stack);
+  try {
+    if (stack.size() < 2)
+      throw new ExceptionStack;
+    IOperand *i = stack.front();
+    stack.pop_front();
+    IOperand *k = stack.front();
+    stack.pop_front();
+    IOperand *ret = *i / *k;
+    stack.push_front(ret);
+    delete i;
+    delete k;
+  } catch (ExceptionStack *e) {
+    std::cout << e->what() << std::endl;
+    std::exit(84);
+  }
+  return (stack);
 }
 
 std::list<IOperand *> Instructions::mod(std::list<IOperand *> stack) {
-    return (stack);
+  try {
+    if (stack.size() < 2)
+      throw new ExceptionStack;
+    IOperand *i = stack.front();
+    stack.pop_front();
+    IOperand *k = stack.front();
+    stack.pop_front();
+    IOperand *ret = *i % *k;
+    stack.push_front(ret);
+    delete i;
+    delete k;
+  } catch (ExceptionStack *e) {
+    std::cout << e->what() << std::endl;
+    std::exit(84);
+  }
+  return (stack);
 }
 
 std::list<IOperand *> Instructions::print(std::list<IOperand *> stack) {
+  try {
+    if (stack.size() < 1)
+      throw new ExceptionStack;
+    IOperand *c = stack.front();
+    if (c->getType() != eOperandType::Int8)
+      throw new ExceptionOperand;
+    std::cout << (char)stoi(c->toString());
+  } catch (ExceptionStack *e) {
+    std::cout << e->what() << std::endl;
+    std::exit(84);
+  } catch (ExceptionOperand *e) {
+    std::cout << e->what() << std::endl;
+    std::exit(84);
+  }
     return (stack);
 }
 

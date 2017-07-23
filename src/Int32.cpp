@@ -5,7 +5,7 @@
 // Login   <romain.dick@epitech.eu>
 //
 // Started on  Fri Jul 21 10:44:46 2017 Romain Dick
-// Last update Fri Jul 21 16:39:37 2017 Julien Leleu
+// Last update Sun Jul 23 17:36:02 2017 Julien Leleu
 //
 
 #include <string>
@@ -47,7 +47,7 @@ eOperandType Int32::getType() const {
 
 IOperand *Int32::operator+(const IOperand &rhs) const {
     std::ostringstream tmp;
-    int result = (int) ((char) stoi(rhs.toString()) + this->operand);
+    int result = stoi(rhs.toString()) + this->operand;
 
     tmp << result;
     return (new Int32(tmp.str()));
@@ -55,7 +55,7 @@ IOperand *Int32::operator+(const IOperand &rhs) const {
 
 IOperand *Int32::operator-(const IOperand &rhs) const {
     std::ostringstream tmp;
-    int result = (int) ((char) stoi(rhs.toString()) - this->operand);
+    int result = stoi(rhs.toString()) - this->operand;
 
     tmp << result;
     return (new Int32(tmp.str()));
@@ -63,7 +63,7 @@ IOperand *Int32::operator-(const IOperand &rhs) const {
 
 IOperand *Int32::operator*(const IOperand &rhs) const {
     std::ostringstream tmp;
-    int result = (int) ((char) stoi(rhs.toString()) * this->operand);
+    int result = stoi(rhs.toString()) * this->operand;
 
     tmp << result;
     return (new Int32(tmp.str()));
@@ -78,7 +78,7 @@ IOperand *Int32::operator/(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    int result = (int) ((char) stoi(rhs.toString()) / this->operand);
+    int result = stoi(rhs.toString()) / this->operand;
     tmp << result;
     return (new Int32(tmp.str()));
 }
@@ -92,7 +92,7 @@ IOperand *Int32::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    int result = (int) ((char) stoi(rhs.toString()) / this->operand);
+    int result = stoi(rhs.toString()) / this->operand;
     tmp << result;
     return (new Int32(tmp.str()));
 }
