@@ -60,9 +60,8 @@ void Execution::executeSimpleInstruction(Instructions *i, std::string line) {
 void Execution::extractInformationsFromLine(std::string line) {
     Instructions *i = new Instructions;
     std::regex s("(pop|clear|dup|swap|dump|add|sub|mul|div|mod|print|exit)");
-    std::regex v("((load|store|push|assert)\\s(int8|int16|int32|float|double|bigdecimal)\\(([1-9]\\d*(\\.\\d+)?)\\))");
+    std::regex v("((load|store|push|assert)\\s(int8|int16|int32|float|double|bigdecimal)\\((-?[1-9]\\d*(\\.\\d+)?)\\))");
     std::smatch match;
-
     try {
         if (std::regex_match(line, s)) {
             executeSimpleInstruction(i, line);
