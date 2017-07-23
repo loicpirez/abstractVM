@@ -29,6 +29,10 @@ std::list<IOperand *> Instructions::swap(std::list<IOperand *> stack) {
 }
 
 std::list<IOperand *> Instructions::dump(std::list<IOperand *> stack) {
+    for (auto &t : stack) {
+        if (t)
+            std::cout << t->toString() << std::endl;
+    }
     return (stack);
 }
 
@@ -53,10 +57,6 @@ std::list<IOperand *> Instructions::mod(std::list<IOperand *> stack) {
 }
 
 std::list<IOperand *> Instructions::print(std::list<IOperand *> stack) {
-    for (auto &t : stack) {
-        if (t)
-            std::cout << t->toString() << std::endl;
-    }
     return (stack);
 }
 
