@@ -72,6 +72,7 @@ std::list<std::string> Parser::readContentFromFile() {
     std::list<std::string> content;
     std::string line;
     std::ifstream in(this->filename);
+    bool has_exit = false;
 
     try {
         if (!in)
@@ -84,7 +85,14 @@ std::list<std::string> Parser::readContentFromFile() {
                     content.push_back(getInput(line));
             }
         }
+        has_exit = (std::find(content.begin(), content.end(), "exit") != content.end());
+
+        if (!this->source_is_file_descriptor && !has_exit)
+            throw new ExceptionNoExit;
         return (content);
+    }
+    catch (const ExceptionNoExit *e) {
+        e->printErrorFinish();
     }
     catch (const ExceptionFile *e) {
         e->printErrorFinish();

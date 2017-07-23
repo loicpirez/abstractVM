@@ -25,6 +25,12 @@ void AbstractVM_Exception::printErrorFinish() const {
     exit(84);
 }
 
+ExceptionNoExit::ExceptionNoExit() throw()
+        : AbstractVM_Exception("Abort: No exit in given file") {}
+
+ExceptionNoExit::~ExceptionNoExit() throw() {}
+
+
 ExceptionSyntax::ExceptionSyntax() throw()
         : AbstractVM_Exception("Abort: Syntax Error") {}
 

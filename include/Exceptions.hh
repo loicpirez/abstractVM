@@ -37,6 +37,13 @@ public:
     virtual ~ExceptionFile() throw();
 };
 
+class ExceptionNoExit : public AbstractVM_Exception {
+public:
+    ExceptionNoExit() throw();
+
+    virtual ~ExceptionNoExit() throw();
+};
+
 
 class ExceptionSyntax : public AbstractVM_Exception {
 public:
