@@ -16,7 +16,7 @@
 
 Parser::Parser(int fd) {
     this->source_is_file_descriptor = true;
-    (void)fd;
+    (void) fd;
 }
 
 Parser::Parser(std::string filename) {
@@ -79,8 +79,7 @@ std::list<std::string> Parser::readContentFromFile() {
         while (std::getline(in, line)) {
             if (line.compare(";;") == 0) {
                 break;
-            }
-            else {
+            } else {
                 if (getInput(line).size() != 0)
                     content.push_back(getInput(line));
             }
@@ -90,4 +89,5 @@ std::list<std::string> Parser::readContentFromFile() {
     catch (const ExceptionFile *e) {
         e->printErrorFinish();
     }
+    return (content);
 }

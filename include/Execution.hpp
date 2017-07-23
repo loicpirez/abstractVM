@@ -12,6 +12,7 @@
 # define EXECUTION_HH
 
 #include "IOperand.hh"
+#include "Instructions.hh"
 #include <list>
 #include <map>
 #include <regex>
@@ -28,16 +29,18 @@ public:
 
     void extractInformationsFromLine(std::string line);
 
-    void extractDoubleInstruction(std::string line, std::smatch match);
-
     void assert(eOperandType type, std::string line);
 
     void push(eOperandType type, std::string line);
 
+    void executeSimpleInstruction(Instructions *i, std::string line);
+
+    void executeDoubleInstruction(Instructions *i, std::smatch match);
 
     std::map<std::string, eOperandType> createOperandPointer();
 
-    std::map<std::string, std::function<void(eOperandType, std::string)>> createFunctionPointer();
+    std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>, eOperandType, std::string)>>
+    createFunctionPointerFromMultiplesArgs();
 
     std::map<eOperandType, std::string> getOperandToStringPointer();
 

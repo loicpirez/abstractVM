@@ -13,30 +13,53 @@
 
 #include <list>
 #include "IOperand.hh"
+#include <map>
+#include <functional>
 
-class Instructions
-{
+
+class Instructions {
 public:
-  Instructions() {}
-  ~Instructions() {}
+    Instructions() {}
 
-  std::list<IOperand *> pop_stack(std::list<IOperand*> stack);
-  std::list<IOperand *> clear_stack(std::list<IOperand*> stack);
-  std::list<IOperand *> dup_stack(std::list<IOperand*> stack);
-  std::list<IOperand *> swap_stack(std::list<IOperand*> stack);
-  std::list<IOperand *> dump_stack(std::list<IOperand*> stack);
-  std::list<IOperand *> add_stack(std::list<IOperand*> stack);
-  std::list<IOperand *> sub_stack(std::list<IOperand*> stack);
-  std::list<IOperand *> mul_stack(std::list<IOperand*> stack);
-  std::list<IOperand *> div_stack(std::list<IOperand*> stack);
-  std::list<IOperand *> mod_stack(std::list<IOperand*> stack);
-  std::list<IOperand *> print_stack(std::list<IOperand*> stack);
-  std::list<IOperand *> exit_stack(std::list<IOperand*> stack);
+    ~Instructions() {}
 
-  std::list<IOperand *> load_stack(std::list<IOperand*> stack, IOperand *current);
-  std::list<IOperand *> store_stack(std::list<IOperand*> stack, IOperand *current);
-  std::list<IOperand *> push_stack(std::list<IOperand*> stack, IOperand *current);
-  std::list<IOperand *> assert_stack(std::list<IOperand*> stack, IOperand *current);
+    std::list<IOperand *> pop(std::list<IOperand *> stack);
+
+    std::list<IOperand *> clear(std::list<IOperand *> stack);
+
+    std::list<IOperand *> dup(std::list<IOperand *> stack);
+
+    std::list<IOperand *> swap(std::list<IOperand *> stack);
+
+    std::list<IOperand *> dump(std::list<IOperand *> stack);
+
+    std::list<IOperand *> add(std::list<IOperand *> stack);
+
+    std::list<IOperand *> sub(std::list<IOperand *> stack);
+
+    std::list<IOperand *> mul(std::list<IOperand *> stack);
+
+    std::list<IOperand *> div(std::list<IOperand *> stack);
+
+    std::list<IOperand *> mod(std::list<IOperand *> stack);
+
+    std::list<IOperand *> print(std::list<IOperand *> stack);
+
+    std::list<IOperand *> exit(std::list<IOperand *> stack);
+
+    std::list<IOperand *> load(std::list<IOperand *> stack, eOperandType type, std::string value);
+
+    std::list<IOperand *> store(std::list<IOperand *> stack, eOperandType type, std::string value);
+
+    std::list<IOperand *> push(std::list<IOperand *> stack, eOperandType type, std::string value);
+
+    std::list<IOperand *> assert(std::list<IOperand *> stack, eOperandType type, std::string value);
+
+    std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>, eOperandType, std::string)>>
+    createFunctionPointerDoubleType();
+
+    std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>)>>
+    createFunctionPointerSingleType();
 };
 
 

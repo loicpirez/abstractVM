@@ -34,5 +34,4 @@ void Machine::Execute() {
     Execution execution;
 
     execution.executionFromInput(this->getInput());
-    execution.printStack();
 }
