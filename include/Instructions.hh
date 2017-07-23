@@ -60,6 +60,8 @@ public:
 
     std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>)>>
     createFunctionPointerSingleType();
+
+    void checkNumberCalc(std::list<IOperand *> stack);
 };
 
 

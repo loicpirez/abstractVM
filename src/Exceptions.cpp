@@ -8,6 +8,9 @@
 // Last update Sun Jul 23 21:53:16 2017 Loïc Pirez
 //
 
+//Abort: Assert has failed
+//Abort:
+
 #include <iostream>
 #include "Exceptions.hh"
 
@@ -24,6 +27,16 @@ void AbstractVM_Exception::printErrorFinish() const {
     std::cerr << this->what() << std::endl;
     exit(84);
 }
+
+ExceptionFailedAssert::ExceptionFailedAssert() throw()
+        : AbstractVM_Exception("Abort: Assert has failed") {}
+
+ExceptionFailedAssert::~ExceptionFailedAssert() throw() {}
+
+ExceptionNotEnoughNumber::ExceptionNotEnoughNumber() throw()
+        : AbstractVM_Exception("Abort: Less than two value to calc") {}
+
+ExceptionNotEnoughNumber::~ExceptionNotEnoughNumber() throw() {}
 
 ExceptionPopEmptyStack::ExceptionPopEmptyStack() throw()
         : AbstractVM_Exception("Abort: Pop on empty stack") {}

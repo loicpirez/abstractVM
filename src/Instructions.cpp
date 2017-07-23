@@ -57,8 +57,6 @@ std::list<IOperand *> Instructions::swap(std::list<IOperand *> stack) {
 
 std::list<IOperand *> Instructions::dump(std::list<IOperand *> stack) {
     try {
-        if (stack.size() == 0)
-            throw new ExceptionDumpEmptyStack;
         for (auto &t : stack) {
             if (t) {
                 std::cout << t->toString() << std::endl;
@@ -73,6 +71,7 @@ std::list<IOperand *> Instructions::dump(std::list<IOperand *> stack) {
 
 std::list<IOperand *> Instructions::add(std::list<IOperand *> stack) {
     try {
+        checkNumberCalc(stack);
         if (stack.size() < 2)
             throw new ExceptionStack;
         IOperand *i = stack.front();
@@ -92,6 +91,7 @@ std::list<IOperand *> Instructions::add(std::list<IOperand *> stack) {
 
 std::list<IOperand *> Instructions::sub(std::list<IOperand *> stack) {
     try {
+        checkNumberCalc(stack);
         if (stack.size() < 2)
             throw new ExceptionStack;
         IOperand *i = stack.front();
@@ -111,6 +111,7 @@ std::list<IOperand *> Instructions::sub(std::list<IOperand *> stack) {
 
 std::list<IOperand *> Instructions::mul(std::list<IOperand *> stack) {
     try {
+        checkNumberCalc(stack);
         if (stack.size() < 2)
             throw new ExceptionStack;
         IOperand *i = stack.front();
@@ -130,6 +131,7 @@ std::list<IOperand *> Instructions::mul(std::list<IOperand *> stack) {
 
 std::list<IOperand *> Instructions::div(std::list<IOperand *> stack) {
     try {
+        checkNumberCalc(stack);
         if (stack.size() < 2)
             throw new ExceptionStack;
         IOperand *i = stack.front();
@@ -149,6 +151,7 @@ std::list<IOperand *> Instructions::div(std::list<IOperand *> stack) {
 
 std::list<IOperand *> Instructions::mod(std::list<IOperand *> stack) {
     try {
+        checkNumberCalc(stack);
         if (stack.size() < 2)
             throw new ExceptionStack;
         IOperand *i = stack.front();
@@ -296,4 +299,16 @@ Instructions::createFunctionPointerDoubleType() {
                                       std::placeholders::_3)
                     },
             };
+}
+
+void Instructions::checkNumberCalc(std::list<IOperand *> stack) {
+    try {
+        if (stack.size() < 2) {
+            throw new ExceptionNotEnoughNumber;
+        }
+    }
+    catch (ExceptionNotEnoughNumber *e) {
+        e->printErrorFinish();
+    }
+
 }

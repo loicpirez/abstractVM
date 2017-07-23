@@ -37,6 +37,20 @@ public:
     virtual ~ExceptionFile() throw();
 };
 
+class ExceptionNotEnoughNumber : public AbstractVM_Exception {
+public:
+    ExceptionNotEnoughNumber() throw();
+
+    virtual ~ExceptionNotEnoughNumber() throw();
+};
+
+class ExceptionFailedAssert : public AbstractVM_Exception {
+public:
+    ExceptionFailedAssert() throw();
+
+    virtual ~ExceptionFailedAssert() throw();
+};
+
 class ExceptionPopEmptyStack : public AbstractVM_Exception {
 public:
     ExceptionPopEmptyStack() throw();
