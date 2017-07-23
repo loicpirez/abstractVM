@@ -81,7 +81,7 @@ std::list<std::string> Parser::readContentFromFile() {
                 break;
             } else {
                 if (getInput(line).size() != 0)
-                    content.push_back(getInput(line));
+                    content.push_front(getInput(line));
             }
         }
         return (content);

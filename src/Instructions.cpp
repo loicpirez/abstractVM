@@ -30,8 +30,10 @@ std::list<IOperand *> Instructions::swap(std::list<IOperand *> stack) {
 
 std::list<IOperand *> Instructions::dump(std::list<IOperand *> stack) {
     for (auto &t : stack) {
-        if (t)
+        if (t) {
             std::cout << t->toString() << std::endl;
+            fflush(0);
+        }
     }
     return (stack);
 }
