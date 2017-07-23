@@ -11,11 +11,9 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <cfloat>
 #include "Exceptions.hh"
 #include "Double.hh"
-
-#define MAX_FLOAT 340282346638528859811704183484516925440.000000
-#define MIN_FLOAT 0.000000
 
 using namespace operand_double;
 
@@ -23,9 +21,9 @@ Double::Double(const std::string &data) {
     double tmp = stof(data);
 
     try {
-        if (tmp > MAX_FLOAT)
+        if (tmp > DBL_MAX)
             throw new ExceptionOverflow;
-        else if (tmp < MIN_FLOAT)
+        else if (tmp < -DBL_MAX)
             throw new ExceptionUnderflow;
     } catch (const ExceptionOverflow *e) {
         e->printErrorFinish();

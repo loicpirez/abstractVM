@@ -12,11 +12,9 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <cfloat>
 #include "Exceptions.hh"
 #include "Float.hh"
-
-#define MAX_FLOAT 340282346638528859811704183484516925440.000000
-#define MIN_FLOAT 0.000000
 
 using namespace operand_float;
 
@@ -24,9 +22,9 @@ Float::Float(const std::string &data) {
     float tmp = stof(data);
 
     try {
-        if (tmp > MAX_FLOAT)
+        if (tmp > FLT_MAX)
             throw new ExceptionOverflow;
-        else if (tmp < MIN_FLOAT)
+        else if (tmp < -FLT_MAX)
             throw new ExceptionUnderflow;
     } catch (const ExceptionOverflow *e) {
         e->printErrorFinish();
@@ -51,6 +49,7 @@ eOperandType Float::getType() const {
 
 IOperand *Float::operator+(const IOperand &rhs) const {
     std::ostringstream tmp;
+    rhs.toString();
     float result = stof(rhs.toString()) + this->operand;
 
     tmp << result;

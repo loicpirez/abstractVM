@@ -11,6 +11,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <climits>
 #include "Exceptions.hh"
 #include "Int16.hh"
 
@@ -20,9 +21,9 @@ Int16::Int16(const std::string &data) {
     int tmp = stoi(data);
 
     try {
-        if (tmp > 32767)
+        if (tmp > SHRT_MAX)
             throw new ExceptionOverflow;
-        else if (tmp < -32768)
+        else if (tmp < SHRT_MIN)
             throw new ExceptionUnderflow;
     } catch (const ExceptionOverflow *e) {
         e->printErrorFinish();

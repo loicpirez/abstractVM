@@ -11,6 +11,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <climits>
 #include "Exceptions.hh"
 #include "Int32.hh"
 
@@ -20,9 +21,9 @@ Int32::Int32(const std::string &data) {
     int tmp = stoi(data);
 
     try {
-        if (tmp >= 2147483647)
+        if (tmp > INT_MAX)
             throw new ExceptionOverflow;
-        else if (tmp <= -2147483648)
+        else if (tmp < INT_MIN)
             throw new ExceptionUnderflow;
     } catch (const ExceptionOverflow *e) {
         e->printErrorFinish();

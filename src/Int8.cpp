@@ -11,6 +11,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <climits>
 #include "Exceptions.hh"
 #include "Int8.hh"
 
@@ -20,9 +21,9 @@ Int8::Int8(const std::string &data) {
     int tmp = stoi(data);
 
     try {
-        if (tmp > 127)
+        if (tmp > SCHAR_MAX)
             throw new ExceptionOverflow;
-        else if (tmp < -128)
+        else if (tmp < SCHAR_MIN)
             throw new ExceptionUnderflow;
     } catch (const ExceptionOverflow *e) {
         e->printErrorFinish();

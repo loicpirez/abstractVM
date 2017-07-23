@@ -11,19 +11,17 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <cfloat>
 #include "Exceptions.hh"
 #include "BigDecimal.hh"
-
-#define MAX_FLOAT 340282346638528859811704183484516925440.000000
-#define MIN_FLOAT 0.000000
 
 BigDecimal::BigDecimal(const std::string &data) {
     long double tmp = stold(data);
 
     try {
-        if (tmp > MAX_FLOAT)
+        if (tmp > FLT_MAX)
             throw new ExceptionOverflow;
-        else if (tmp < MIN_FLOAT)
+        else if (tmp < -FLT_MIN)
             throw new ExceptionUnderflow;
     } catch (const ExceptionOverflow *e) {
         e->printErrorFinish();
