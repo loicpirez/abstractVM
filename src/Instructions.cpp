@@ -169,6 +169,7 @@ std::list<IOperand *> Instructions::print(std::list<IOperand *> stack) {
     if (c->getType() != eOperandType::Int8)
       throw new ExceptionOperand;
     std::cout << (char)stoi(c->toString());
+    std::cout << std::endl;
   } catch (ExceptionStack *e) {
     std::cout << e->what() << std::endl;
     std::exit(84);
