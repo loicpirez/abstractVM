@@ -5,26 +5,54 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Sat Jul 22 17:14:27 2017 Julien Leleu
-// Last update Sat Jul 22 17:40:31 2017 Julien Leleu
+// Last update Sun Jul 23 16:58:52 2017 Julien Leleu
 //
 
 #include <iostream>
 #include <Execution.hpp>
+#include "Exceptions.hh"
 #include <Factory.hpp>
 
 std::list<IOperand *> Instructions::pop(std::list<IOperand *> stack) {
+  try {
+    if (stack.size() == 0)
+      throw new ExceptionStack;
+    stack.pop_front();
+  } catch (const ExceptionStack *e) {
+    std::cout << e->what() << std::endl;
+    std::exit(84);
+  }
     return (stack);
 }
 
 std::list<IOperand *> Instructions::clear(std::list<IOperand *> stack) {
-    return (stack);
+  stack.clear();
+  return (stack);
 }
 
 std::list<IOperand *> Instructions::dup(std::list<IOperand *> stack) {
+  try {
+    if (stack.size() == 0)
+      throw new ExceptionStack;
+    stack.push_front(stack.front());
+  } catch (const ExceptionStack *e) {
+    std::cout << e->what() << std::endl;
+    std::exit(84);
+  }
     return (stack);
 }
 
 std::list<IOperand *> Instructions::swap(std::list<IOperand *> stack) {
+  try {
+    if (stack.size() < 2)
+      throw new ExceptionStack;
+    auto it2 = stack.begin();
+    auto it1 = it2++;
+    std::swap(*it1, *it2);
+  } catch (const ExceptionStack *e) {
+    std::cout << e->what() << std::endl;
+    std::exit(84);
+  }
     return (stack);
 }
 
