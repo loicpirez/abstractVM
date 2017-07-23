@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Fri Jul 21 17:58:43 2017 Julien Leleu
-// Last update Fri Jul 21 18:35:05 2017 Julien Leleu
+// Last update Sun Jul 23 21:04:17 2017 Loïc Pirez
 //
 
 #include <string>
@@ -14,6 +14,7 @@
 #include <cfloat>
 #include "Exceptions.hh"
 #include "BigDecimal.hh"
+#include <cmath>
 
 BigDecimal::BigDecimal(const std::string &data) {
     long double tmp = stold(data);
@@ -91,7 +92,7 @@ IOperand *BigDecimal::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    long double result = stold(rhs.toString()) / this->operand;
+    long double result = fmod(stold(rhs.toString()), this->operand);
     tmp << result;
     return (new BigDecimal(tmp.str()));
 }

@@ -93,7 +93,7 @@ IOperand *Int8::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    int result = (char) stoi(rhs.toString()) / this->operand;
+    int result = (char) stoi(rhs.toString()) % this->operand;
     tmp << result;
     return (new Int8(tmp.str()));
 }

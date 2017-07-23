@@ -13,6 +13,7 @@
 #include <sstream>
 #include <iostream>
 #include <cfloat>
+#include <cmath>
 #include "Exceptions.hh"
 #include "Float.hh"
 
@@ -95,7 +96,7 @@ IOperand *Float::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    float result = (float) stoi(rhs.toString()) / this->operand;
+    float result = fmodf(stoi(rhs.toString()), this->operand);
     tmp << result;
     return (new Float(tmp.str()));
 }

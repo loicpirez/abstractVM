@@ -93,7 +93,7 @@ IOperand *Int32::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    int result = stoi(rhs.toString()) / this->operand;
+    int result = (int) ((short) stoi(rhs.toString()) % this->operand);
     tmp << result;
     return (new Int32(tmp.str()));
 }

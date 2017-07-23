@@ -14,6 +14,7 @@
 #include <cfloat>
 #include "Exceptions.hh"
 #include "Double.hh"
+#include <cmath>
 
 using namespace operand_double;
 
@@ -93,7 +94,7 @@ IOperand *Double::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    double result = (double) stof(rhs.toString()) / this->operand;
+    double result = fmod(stof(rhs.toString()), this->operand);
     tmp << result;
     return (new Double(tmp.str()));
 }
