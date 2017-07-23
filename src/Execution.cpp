@@ -5,7 +5,7 @@
 // Login   <loic.pirez@epitech.eu>
 //
 // Started on  Sat Jul 22 16:36:13 2017 Loïc Pirez
-// Last update Sat Jul 22 16:36:13 2017 Loïc Pirez
+// Last update Sun Jul 23 21:53:04 2017 Loïc Pirez
 //
 
 #include <IOperand.hh>
@@ -13,18 +13,6 @@
 #include <Execution.hpp>
 #include <iostream>
 #include <Exceptions.hh>
-
-Execution::Execution() {
-    this->initializeStack();
-}
-
-void Execution::initializeStack(void) {
-    IOperand *empty = 0;
-
-    for (size_t i = 0; i != MAX_REGISTERS; i++) {
-        this->stack.push_back(empty);
-    }
-}
 
 std::map<std::string, eOperandType> Execution::createOperandPointer() {
     return {

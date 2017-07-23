@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Thu Jul 20 15:32:32 2017 Julien Leleu
-// Last update Thu Jul 20 17:26:19 2017 Julien Leleu
+// Last update Sun Jul 23 21:53:16 2017 Loïc Pirez
 //
 
 #include <iostream>
@@ -24,6 +24,18 @@ void AbstractVM_Exception::printErrorFinish() const {
     std::cerr << this->what() << std::endl;
     exit(84);
 }
+
+ExceptionPopEmptyStack::ExceptionPopEmptyStack() throw()
+        : AbstractVM_Exception("Abort: Pop on empty stack") {}
+
+ExceptionPopEmptyStack::~ExceptionPopEmptyStack() throw() {}
+
+
+ExceptionDumpEmptyStack::ExceptionDumpEmptyStack() throw()
+        : AbstractVM_Exception("Abort: Dump on empty stack") {}
+
+ExceptionDumpEmptyStack::~ExceptionDumpEmptyStack() throw() {}
+
 
 ExceptionNoExit::ExceptionNoExit() throw()
         : AbstractVM_Exception("Abort: No exit in given file") {}

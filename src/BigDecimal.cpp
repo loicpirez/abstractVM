@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Fri Jul 21 17:58:43 2017 Julien Leleu
-// Last update Sun Jul 23 21:04:17 2017 Loïc Pirez
+// Last update Sun Jul 23 21:53:20 2017 Loïc Pirez
 //
 
 #include <string>
@@ -92,7 +92,7 @@ IOperand *BigDecimal::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    long double result = fmod(stold(rhs.toString()), this->operand);
+    long double result = fmod((double) stold(rhs.toString()), (double) this->operand);
     tmp << result;
     return (new BigDecimal(tmp.str()));
 }

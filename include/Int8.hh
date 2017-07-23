@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Fri Jul 21 09:38:23 2017 Julien Leleu
-// Last update Fri Jul 21 10:34:37 2017 Julien Leleu
+// Last update Sun Jul 23 21:50:36 2017 Loïc Pirez
 //
 
 #ifndef INT8_HH

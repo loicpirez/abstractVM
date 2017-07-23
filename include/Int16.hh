@@ -5,7 +5,7 @@
 // Login   <romain.dick@epitech.eu>
 //
 // Started on  Fri Jul 21 10:45:08 2017 Romain Dick
-// Last update Fri Jul 21 20:07:46 2017 Julien Leleu
+// Last update Sun Jul 23 21:50:38 2017 Loïc Pirez
 //
 
 #ifndef        INT16_HH_

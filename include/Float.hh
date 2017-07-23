@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Fri Jul 21 16:46:31 2017 Julien Leleu
-// Last update Fri Jul 21 16:48:23 2017 Julien Leleu
+// Last update Sun Jul 23 21:50:32 2017 Loïc Pirez
 //
 
 #ifndef FLOAT_HH

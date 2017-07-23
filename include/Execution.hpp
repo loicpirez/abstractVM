@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Fri Jul 21 17:55:45 2017 Julien Leleu
-// Last update Fri Jul 21 18:27:18 2017 Julien Leleu
+// Last update Sun Jul 23 21:50:27 2017 Loïc Pirez
 //
 
 #ifndef EXECUTION_HH
@@ -19,7 +19,7 @@
 
 class Execution {
 public:
-    Execution();
+    Execution() {};
 
     ~Execution() {};
 

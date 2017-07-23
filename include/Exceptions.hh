@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Thu Jul 20 15:34:44 2017 Julien Leleu
-// Last update Thu Jul 20 17:25:27 2017 Julien Leleu
+// Last update Sun Jul 23 21:50:24 2017 Loïc Pirez
 //
 
 #ifndef EXCEPTIONS_HH
@@ -35,6 +35,20 @@ public:
     ExceptionFile() throw();
 
     virtual ~ExceptionFile() throw();
+};
+
+class ExceptionPopEmptyStack : public AbstractVM_Exception {
+public:
+    ExceptionPopEmptyStack() throw();
+
+    virtual ~ExceptionPopEmptyStack() throw();
+};
+
+class ExceptionDumpEmptyStack : public AbstractVM_Exception {
+public:
+    ExceptionDumpEmptyStack() throw();
+
+    virtual ~ExceptionDumpEmptyStack() throw();
 };
 
 class ExceptionNoExit : public AbstractVM_Exception {
