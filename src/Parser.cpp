@@ -63,7 +63,7 @@ std::list<std::string> Parser::readContentFromStandardInput() {
 
     for (std::string line; std::getline(std::cin, line) && line.compare(";;") != 0;) {
         if (getInput(line).size() != 0)
-            content.push_front(checkLine(line));
+            content.push_back(checkLine(line));
     }
     return (content);
 }
@@ -81,7 +81,7 @@ std::list<std::string> Parser::readContentFromFile() {
                 break;
             } else {
                 if (getInput(line).size() != 0)
-                    content.push_front(getInput(line));
+                    content.push_back(getInput(line));
             }
         }
         return (content);

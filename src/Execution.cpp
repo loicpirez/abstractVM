@@ -81,7 +81,6 @@ void Execution::extractInformationsFromLine(std::string line) {
 }
 
 void Execution::executionFromInput(std::list<std::string> input) {
-    input.reverse();
     for (auto &line : input) {
         extractInformationsFromLine(line);
     }
