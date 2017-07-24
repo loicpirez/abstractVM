@@ -31,7 +31,7 @@ Int16::Int16(const std::string &data) {
         e->printErrorFinish();
     }
     this->precision = 0;
-    this->operand = (short) tmp;
+    this->operand = static_cast<short>(tmp);
 }
 
 Int16::~Int16() {}
@@ -55,7 +55,7 @@ IOperand *Int16::operator+(const IOperand &rhs) const {
   if (rhs.getType() > this->getType())
     return (rhs + *this);
   std::ostringstream tmp;
-  int result = (short) stoi(rhs.toString()) + this->operand;
+  int result = static_cast<short>(stoi(rhs.toString()) + this->operand);
 
   tmp << result;
   return (new Int16(tmp.str()));
@@ -65,7 +65,7 @@ IOperand *Int16::operator-(const IOperand &rhs) const {
   if (rhs.getType() > this->getType())
     return (rhs - *this);
   std::ostringstream tmp;
-  int result = this->operand - (short)stoi(rhs.toString());
+  int result = this->operand - static_cast<short>(stoi(rhs.toString()));
 
   tmp << result;
   return (new Int16(tmp.str()));
@@ -75,7 +75,7 @@ IOperand *Int16::operator*(const IOperand &rhs) const {
   if (rhs.getType() > this->getType())
     return (rhs * *this);
   std::ostringstream tmp;
-  int result = (short) stoi(rhs.toString()) * this->operand;
+  int result = static_cast<short>(stoi(rhs.toString()) * this->operand);
 
   tmp << result;
   return (new Int16(tmp.str()));
@@ -90,7 +90,7 @@ IOperand *Int16::operator/(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    int result = (short) this->operand / stoi(rhs.toString());
+    int result = static_cast<short>(this->operand / stoi(rhs.toString()));
     tmp << result;
     return (new Int16(tmp.str()));
 }
@@ -104,7 +104,7 @@ IOperand *Int16::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    int result = (short) this->operand % stoi(rhs.toString());
+    int result = static_cast<short>(this->operand % stoi(rhs.toString()));
     tmp << result;
     return (new Int16(tmp.str()));
 }

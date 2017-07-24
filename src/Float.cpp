@@ -35,7 +35,7 @@ Float::Float(const std::string &data) {
     }
     this->precision = 0;
     if (data.find(".") != std::string::npos)
-        this->precision = this->precision > 3 ? 3 : (int) (data.substr(data.find(".") + 1).length());
+        this->precision = this->precision > 3 ? 3 : static_cast<int> (data.substr(data.find(".") + 1).length());
     this->operand = tmp;
 }
 

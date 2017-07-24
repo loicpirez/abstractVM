@@ -31,7 +31,7 @@ Int8::Int8(const std::string &data) {
         e->printErrorFinish();
     }
     this->precision = 0;
-    this->operand = (char) tmp;
+    this->operand = static_cast<char>(tmp);
 }
 
 Int8::~Int8() {}
@@ -55,7 +55,7 @@ IOperand *Int8::operator+(const IOperand &rhs) const {
   if (rhs.getType() > this->getType())
     return (rhs + *this);
   std::ostringstream tmp;
-  int result = (char) stoi(rhs.toString()) + this->operand;
+  int result = static_cast<char>(stoi(rhs.toString()) + this->operand);
 
   tmp << result;
   return (new Int8(tmp.str()));
@@ -65,7 +65,7 @@ IOperand *Int8::operator-(const IOperand &rhs) const {
   if (rhs.getType() > this->getType())
     return (rhs - *this);
   std::ostringstream tmp;
-  int result = this->operand - (char)stoi(rhs.toString());
+  int result = this->operand - (char)(stoi(rhs.toString()));
 
   tmp << result;
   return (new Int8(tmp.str()));
@@ -75,7 +75,7 @@ IOperand *Int8::operator*(const IOperand &rhs) const {
   if (rhs.getType() > this->getType())
     return (rhs * *this);
   std::ostringstream tmp;
-  int result = (char) stoi(rhs.toString()) * this->operand;
+  int result = static_cast<char>(stoi(rhs.toString()) * this->operand);
 
   tmp << result;
   return (new Int8(tmp.str()));
@@ -90,7 +90,7 @@ IOperand *Int8::operator/(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    int result = (char) this->operand / stoi(rhs.toString());
+    int result = static_cast<char>(this->operand / stoi(rhs.toString()));
     tmp << result;
     return (new Int8(tmp.str()));
 }
@@ -104,7 +104,7 @@ IOperand *Int8::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    int result = (char) this->operand % stoi(rhs.toString());
+    int result = static_cast<char>(this->operand % stoi(rhs.toString()));
     tmp << result;
     return (new Int8(tmp.str()));
 }

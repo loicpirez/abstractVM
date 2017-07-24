@@ -34,7 +34,7 @@ Double::Double(const std::string &data) {
     }
     this->precision = 0;
     if (data.find(".") != std::string::npos)
-        this->precision = this->precision > 7 ? 7 : (int) (data.substr(data.find(".") + 1).length());
+        this->precision = this->precision > 7 ? 7 : static_cast<int> (data.substr(data.find(".") + 1).length());
     this->operand = tmp;
 }
 

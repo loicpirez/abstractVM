@@ -32,7 +32,7 @@ BigDecimal::BigDecimal(const std::string &data) {
         e->printErrorFinish();
     }
     if (data.find(".") != std::string::npos)
-        this->precision = this->precision > 200 ? 200 : (int) (data.substr(data.find(".") + 1).length());
+        this->precision = this->precision > 200 ? 200 : static_cast<int> (data.substr(data.find(".") + 1).length());
     this->operand = tmp;
 }
 
