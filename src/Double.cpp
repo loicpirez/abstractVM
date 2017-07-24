@@ -15,12 +15,12 @@
 #include "Exceptions.hh"
 #include "Double.hh"
 #include <cmath>
-#include <iomanip>
 
 using namespace operand_double;
 
 Double::Double(const std::string &data) {
-    double tmp = stod(data);
+    double tmp = stof(data);
+
     try {
         if (tmp > DBL_MAX)
             throw new ExceptionOverflow;
@@ -38,9 +38,7 @@ Double::~Double() {}
 
 std::string Double::toString() const {
     std::ostringstream tmp;
-    std::cout.precision(8);
 
-    tmp << std::fixed;
     tmp << operand;
     return (tmp.str());
 }

@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Fri Jul 21 09:38:28 2017 Julien Leleu
-// Last update Fri Jul 21 16:14:08 2017 Julien Leleu
+// Last update Mon Jul 24 13:02:43 2017 Julien Leleu
 //
 
 #include <string>
@@ -47,27 +47,33 @@ eOperandType Int8::getType() const {
 }
 
 IOperand *Int8::operator+(const IOperand &rhs) const {
-    std::ostringstream tmp;
-    int result = (char) stoi(rhs.toString()) + this->operand;
+  if (rhs.getType() > this->getType())
+    return (rhs + *this);
+  std::ostringstream tmp;
+  int result = (char) stoi(rhs.toString()) + this->operand;
 
-    tmp << result;
-    return (new Int8(tmp.str()));
+  tmp << result;
+  return (new Int8(tmp.str()));
 }
 
 IOperand *Int8::operator-(const IOperand &rhs) const {
-    std::ostringstream tmp;
-    int result = (char) stoi(rhs.toString()) - this->operand;
+  if (rhs.getType() > this->getType())
+    return (rhs - *this);
+  std::ostringstream tmp;
+  int result = this->operand - (char)stoi(rhs.toString());
 
-    tmp << result;
-    return (new Int8(tmp.str()));
+  tmp << result;
+  return (new Int8(tmp.str()));
 }
 
 IOperand *Int8::operator*(const IOperand &rhs) const {
-    std::ostringstream tmp;
-    int result = (char) stoi(rhs.toString()) * this->operand;
+  if (rhs.getType() > this->getType())
+    return (rhs * *this);
+  std::ostringstream tmp;
+  int result = (char) stoi(rhs.toString()) * this->operand;
 
-    tmp << result;
-    return (new Int8(tmp.str()));
+  tmp << result;
+  return (new Int8(tmp.str()));
 }
 
 IOperand *Int8::operator/(const IOperand &rhs) const {

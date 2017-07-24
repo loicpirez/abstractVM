@@ -36,9 +36,7 @@ BigDecimal::~BigDecimal() {}
 
 std::string BigDecimal::toString() const {
     std::ostringstream tmp;
-    std::cout.precision(201);
 
-    tmp << std::fixed;
     tmp << operand;
     return (tmp.str());
 }

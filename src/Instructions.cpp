@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Sat Jul 22 17:14:27 2017 Julien Leleu
-// Last update Sun Jul 23 19:32:28 2017 Julien Leleu
+// Last update Mon Jul 24 12:51:36 2017 Julien Leleu
 //
 
 #include <iostream>
@@ -98,7 +98,7 @@ std::list<IOperand *> Instructions::sub(std::list<IOperand *> stack) {
         stack.pop_front();
         IOperand *k = stack.front();
         stack.pop_front();
-        IOperand *ret = *i - *k;
+        IOperand *ret = *k - *i;
         stack.push_front(ret);
         delete i;
         delete k;
@@ -269,16 +269,8 @@ std::list<IOperand *> Instructions::push(std::list<IOperand *> stack, eOperandTy
 }
 
 std::list<IOperand *> Instructions::assert(std::list<IOperand *> stack, eOperandType type, std::string value) {
+    (void) value;
     (void) type;
-    try {
-        if (stack.size() < 1)
-            throw new ExceptionFailedAssert;
-        IOperand *c = stack.front();
-        if (c->toString().compare(value) != 0)
-            throw new ExceptionFailedAssert;
-    } catch (const ExceptionFailedAssert *e) {
-        e->printErrorFinish();
-    }
     return (stack);
 }
 
