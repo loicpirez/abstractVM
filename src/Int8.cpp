@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Fri Jul 21 09:38:28 2017 Julien Leleu
-// Last update Mon Jul 24 13:02:43 2017 Julien Leleu
+// Last update Mon Jul 24 14:39:50 2017 Julien Leleu
 //
 
 #include <string>
@@ -30,10 +30,15 @@ Int8::Int8(const std::string &data) {
     } catch (const ExceptionUnderflow *e) {
         e->printErrorFinish();
     }
+    this->precision = 0;
     this->operand = (char) tmp;
 }
 
 Int8::~Int8() {}
+
+int Int8::getPrecision() const {
+    return (this->precision);
+}
 
 std::string Int8::toString() const {
     std::ostringstream tmp;
@@ -85,7 +90,7 @@ IOperand *Int8::operator/(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    int result = (char) stoi(rhs.toString()) / this->operand;
+    int result = (char) this->operand / stoi(rhs.toString());
     tmp << result;
     return (new Int8(tmp.str()));
 }
@@ -99,7 +104,7 @@ IOperand *Int8::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    int result = (char) stoi(rhs.toString()) % this->operand;
+    int result = (char) this->operand % stoi(rhs.toString());
     tmp << result;
     return (new Int8(tmp.str()));
 }

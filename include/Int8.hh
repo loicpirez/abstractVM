@@ -35,6 +35,8 @@ namespace operand_int8 {
 
         IOperand *operator%(const IOperand &rhs) const;
 
+        int getPrecision() const;
+
     protected:
         char operand;
     };

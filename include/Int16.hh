@@ -34,6 +34,8 @@ namespace operand_int16 {
 
         IOperand *operator%(const IOperand &rhs) const;
 
+        int getPrecision() const;
+
     protected:
         short operand;
     };

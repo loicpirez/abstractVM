@@ -35,6 +35,8 @@ namespace operand_float {
 
         IOperand *operator%(const IOperand &rhs) const;
 
+        int getPrecision() const;
+
     protected:
         float operand;
     };

@@ -29,6 +29,9 @@ BigDecimal::BigDecimal(const std::string &data) {
     } catch (const ExceptionUnderflow *e) {
         e->printErrorFinish();
     }
+    this->precision = (int) (data.substr(data.find(".") + 1).length());
+    if (this->precision > 200)
+        this->precision = 200;
     this->operand = tmp;
 }
 

@@ -33,6 +33,8 @@ public:
 
     IOperand *operator%(const IOperand &rhs) const;
 
+    int getPrecision() const;
+
 protected:
     long double operand;
 };

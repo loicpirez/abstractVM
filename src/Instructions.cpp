@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Sat Jul 22 17:14:27 2017 Julien Leleu
-// Last update Mon Jul 24 12:51:36 2017 Julien Leleu
+// Last update Mon Jul 24 14:40:43 2017 Julien Leleu
 //
 
 #include <iostream>
@@ -56,15 +56,11 @@ std::list<IOperand *> Instructions::swap(std::list<IOperand *> stack) {
 }
 
 std::list<IOperand *> Instructions::dump(std::list<IOperand *> stack) {
-    try {
-        for (auto &t : stack) {
-            if (t) {
-                std::cout << t->toString() << std::endl;
-                fflush(0);
-            }
+    for (auto &t : stack) {
+        if (t) {
+            std::cout << t->toString() << std::endl;
+            fflush(0);
         }
-    } catch (const ExceptionDumpEmptyStack *e) {
-        e->printErrorFinish();
     }
     return (stack);
 }
@@ -138,7 +134,7 @@ std::list<IOperand *> Instructions::div(std::list<IOperand *> stack) {
         stack.pop_front();
         IOperand *k = stack.front();
         stack.pop_front();
-        IOperand *ret = *i / *k;
+        IOperand *ret = *k / *i;
         stack.push_front(ret);
         delete i;
         delete k;
@@ -158,7 +154,7 @@ std::list<IOperand *> Instructions::mod(std::list<IOperand *> stack) {
         stack.pop_front();
         IOperand *k = stack.front();
         stack.pop_front();
-        IOperand *ret = *i % *k;
+        IOperand *ret = *k % *i;
         stack.push_front(ret);
         delete i;
         delete k;

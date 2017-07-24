@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Fri Jul 21 16:57:41 2017 Julien Leleu
-// Last update Sun Jul 23 21:53:01 2017 Loïc Pirez
+// Last update Mon Jul 24 14:42:33 2017 Julien Leleu
 //
 
 
@@ -14,6 +14,7 @@
 #include <iostream>
 #include <cfloat>
 #include <cmath>
+#include <iomanip>
 #include "Exceptions.hh"
 #include "Float.hh"
 
@@ -32,15 +33,21 @@ Float::Float(const std::string &data) {
     } catch (const ExceptionUnderflow *e) {
         e->printErrorFinish();
     }
+    this->precision = (int) (data.substr(data.find(".") + 1).length());
+    if (this->precision > 3)
+        this->precision = 3;
     this->operand = tmp;
 }
 
 Float::~Float() {}
 
+int Float::getPrecision() const {
+    return (this->precision);
+}
+
 std::string Float::toString() const {
     std::ostringstream tmp;
-
-    tmp << operand;
+    tmp << std::fixed << std::setprecision(precision) << operand;
     return (tmp.str());
 }
 
@@ -59,7 +66,7 @@ IOperand *Float::operator+(const IOperand &rhs) const {
 
 IOperand *Float::operator-(const IOperand &rhs) const {
     std::ostringstream tmp;
-    float result = stof(rhs.toString()) - this->operand;
+    float result = this->operand - stof(rhs.toString());
 
     tmp << result;
     return (new Float(tmp.str()));
@@ -67,7 +74,7 @@ IOperand *Float::operator-(const IOperand &rhs) const {
 
 IOperand *Float::operator*(const IOperand &rhs) const {
     std::ostringstream tmp;
-    float result = (float) stoi(rhs.toString()) * this->operand;
+    float result = stof(rhs.toString()) * this->operand;
 
     tmp << result;
     return (new Float(tmp.str()));
@@ -82,7 +89,7 @@ IOperand *Float::operator/(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    float result = (float) stoi(rhs.toString()) / this->operand;
+    float result = this->operand / stof(rhs.toString());
     tmp << result;
     return (new Float(tmp.str()));
 }
@@ -96,7 +103,7 @@ IOperand *Float::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    float result = fmodf(stoi(rhs.toString()), this->operand);
+    float result = fmodf(this->operand, stof(rhs.toString()));
     tmp << result;
     return (new Float(tmp.str()));
 }

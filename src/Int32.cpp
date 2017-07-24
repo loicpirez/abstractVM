@@ -5,7 +5,7 @@
 // Login   <romain.dick@epitech.eu>
 //
 // Started on  Fri Jul 21 10:44:46 2017 Romain Dick
-// Last update Mon Jul 24 13:01:54 2017 Julien Leleu
+// Last update Mon Jul 24 14:44:09 2017 Julien Leleu
 //
 
 #include <string>
@@ -30,10 +30,15 @@ Int32::Int32(const std::string &data) {
     } catch (const ExceptionUnderflow *e) {
         e->printErrorFinish();
     }
+    this->precision = 0;
     this->operand = tmp;
 }
 
 Int32::~Int32() {}
+
+int Int32::getPrecision() const {
+    return (this->precision);
+}
 
 std::string Int32::toString() const {
     std::ostringstream tmp;
@@ -85,7 +90,7 @@ IOperand *Int32::operator/(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    int result = (int) (stoi(rhs.toString()) / this->operand);
+    int result = this->operand / stoi(rhs.toString());
     tmp << result;
     return (new Int32(tmp.str()));
 }
@@ -99,7 +104,7 @@ IOperand *Int32::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    int result = (int) ((short) stoi(rhs.toString()) % this->operand);
+    int result = this->operand % stoi(rhs.toString());
     tmp << result;
     return (new Int32(tmp.str()));
 }

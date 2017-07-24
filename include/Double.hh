@@ -35,6 +35,8 @@ namespace operand_double {
 
         IOperand *operator%(const IOperand &rhs) const;
 
+        int getPrecision() const;
+
     protected:
         double operand;
     };

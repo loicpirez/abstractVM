@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Fri Jul 21 17:44:40 2017 Julien Leleu
-// Last update Fri Jul 21 18:37:27 2017 Julien Leleu
+// Last update Mon Jul 24 14:43:24 2017 Julien Leleu
 //
 
 #include <string>
@@ -15,11 +15,12 @@
 #include "Exceptions.hh"
 #include "Double.hh"
 #include <cmath>
+#include <iomanip>
 
 using namespace operand_double;
 
 Double::Double(const std::string &data) {
-    double tmp = stof(data);
+    double tmp = stod(data);
 
     try {
         if (tmp > DBL_MAX)
@@ -31,15 +32,21 @@ Double::Double(const std::string &data) {
     } catch (const ExceptionUnderflow *e) {
         e->printErrorFinish();
     }
+    this->precision = (int) (data.substr(data.find(".") + 1).length());
+    if (this->precision > 7)
+        this->precision = 7;
     this->operand = tmp;
 }
 
 Double::~Double() {}
 
-std::string Double::toString() const {
-    std::ostringstream tmp;
+int Double::getPrecision() const {
+    return (this->precision);
+}
 
-    tmp << operand;
+std::string Double::toString() const {
+    std::stringstream tmp;
+    tmp << std::fixed << std::setprecision(precision) << operand;
     return (tmp.str());
 }
 
@@ -49,7 +56,7 @@ eOperandType Double::getType() const {
 
 IOperand *Double::operator+(const IOperand &rhs) const {
     std::ostringstream tmp;
-    double result = (double) stof(rhs.toString()) + this->operand;
+    double result = stod(rhs.toString()) + this->operand;
 
     tmp << result;
     return (new Double(tmp.str()));
@@ -57,7 +64,7 @@ IOperand *Double::operator+(const IOperand &rhs) const {
 
 IOperand *Double::operator-(const IOperand &rhs) const {
     std::ostringstream tmp;
-    double result = (double) stof(rhs.toString()) - this->operand;
+    double result = this->operand - stod(rhs.toString());
 
     tmp << result;
     return (new Double(tmp.str()));
@@ -65,7 +72,7 @@ IOperand *Double::operator-(const IOperand &rhs) const {
 
 IOperand *Double::operator*(const IOperand &rhs) const {
     std::ostringstream tmp;
-    double result = (double) stof(rhs.toString()) * this->operand;
+    double result = stod(rhs.toString()) * this->operand;
 
     tmp << result;
     return (new Double(tmp.str()));
@@ -80,7 +87,7 @@ IOperand *Double::operator/(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    double result = (double) stof(rhs.toString()) / this->operand;
+    double result = this->operand / stod(rhs.toString());
     tmp << result;
     return (new Double(tmp.str()));
 }
@@ -94,7 +101,7 @@ IOperand *Double::operator%(const IOperand &rhs) const {
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
-    double result = fmod(stof(rhs.toString()), this->operand);
+    double result = fmod(this->operand, stof(rhs.toString()));
     tmp << result;
     return (new Double(tmp.str()));
 }

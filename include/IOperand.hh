@@ -35,8 +35,10 @@ public:
 
     virtual IOperand *operator%(const IOperand &rhs) const = 0;
 
-    virtual ~IOperand() {}
+    virtual ~IOperand() {};
 
+protected:
+    int precision;
 };
 
 #endif          /* !IOPERAND_HH_ */

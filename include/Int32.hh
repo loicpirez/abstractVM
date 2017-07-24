@@ -34,6 +34,8 @@ namespace operand_int32 {
 
         IOperand *operator%(const IOperand &rhs) const;
 
+        int getPrecision() const;
+
     protected:
         long long operand;
     };
