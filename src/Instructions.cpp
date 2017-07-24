@@ -35,8 +35,7 @@ std::list<IOperand *> Instructions::dup(std::list<IOperand *> stack) {
             throw new ExceptionStack;
         stack.push_front(stack.front());
     } catch (const ExceptionStack *e) {
-        std::cout << e->what() << std::endl;
-        std::exit(84);
+        e->printErrorFinish();
     }
     return (stack);
 }
@@ -49,8 +48,7 @@ std::list<IOperand *> Instructions::swap(std::list<IOperand *> stack) {
         auto it1 = it2++;
         std::swap(*it1, *it2);
     } catch (const ExceptionStack *e) {
-        std::cout << e->what() << std::endl;
-        std::exit(84);
+        e->printErrorFinish();
     }
     return (stack);
 }
@@ -79,8 +77,7 @@ std::list<IOperand *> Instructions::add(std::list<IOperand *> stack) {
         delete i;
         delete k;
     } catch (ExceptionStack *e) {
-        std::cout << e->what() << std::endl;
-        std::exit(84);
+        e->printErrorFinish();
     }
     return (stack);
 }
@@ -99,8 +96,7 @@ std::list<IOperand *> Instructions::sub(std::list<IOperand *> stack) {
         delete i;
         delete k;
     } catch (ExceptionStack *e) {
-        std::cout << e->what() << std::endl;
-        std::exit(84);
+        e->printErrorFinish();
     }
     return (stack);
 }
@@ -119,8 +115,7 @@ std::list<IOperand *> Instructions::mul(std::list<IOperand *> stack) {
         delete i;
         delete k;
     } catch (ExceptionStack *e) {
-        std::cout << e->what() << std::endl;
-        std::exit(84);
+        e->printErrorFinish();
     }
     return (stack);
 }
@@ -139,8 +134,7 @@ std::list<IOperand *> Instructions::div(std::list<IOperand *> stack) {
         delete i;
         delete k;
     } catch (ExceptionStack *e) {
-        std::cout << e->what() << std::endl;
-        std::exit(84);
+        e->printErrorFinish();
     }
     return (stack);
 }
@@ -159,8 +153,7 @@ std::list<IOperand *> Instructions::mod(std::list<IOperand *> stack) {
         delete i;
         delete k;
     } catch (ExceptionStack *e) {
-        std::cout << e->what() << std::endl;
-        std::exit(84);
+        e->printErrorFinish();
     }
     return (stack);
 }
@@ -175,11 +168,9 @@ std::list<IOperand *> Instructions::print(std::list<IOperand *> stack) {
         std::cout << (char) stoi(c->toString());
         std::cout << std::endl;
     } catch (ExceptionStack *e) {
-        std::cout << e->what() << std::endl;
-        std::exit(84);
+        e->printErrorFinish();
     } catch (ExceptionOperand *e) {
-        std::cout << e->what() << std::endl;
-        std::exit(84);
+        e->printErrorFinish();
     }
     return (stack);
 }
@@ -245,8 +236,21 @@ Instructions::createFunctionPointerSingleType() {
 }
 
 std::list<IOperand *> Instructions::load(std::list<IOperand *> stack, eOperandType type, std::string value) {
-    (void) value;
-    (void) type;
+    bool found = false;
+
+    for (auto &t : stack) {
+        if (t) {
+            if (t->getType() == type && t->toString().compare(value) == 0)
+                found = true;
+            fflush(0);
+        }
+    }
+    try {
+        if (!found)
+            throw new ExceptionLoadNotFound;
+    } catch (ExceptionLoadNotFound *e) {
+        e->printErrorFinish();
+    }
     return (stack);
 }
 
@@ -265,7 +269,7 @@ std::list<IOperand *> Instructions::push(std::list<IOperand *> stack, eOperandTy
 }
 
 std::list<IOperand *> Instructions::assert(std::list<IOperand *> stack, eOperandType type, std::string value) {
-    (void)type;
+    (void) type;
     try {
         if (stack.size() < 1)
             throw new ExceptionFailedAssert;

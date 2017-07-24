@@ -28,6 +28,11 @@ void AbstractVM_Exception::printErrorFinish() const {
     exit(84);
 }
 
+ExceptionLoadNotFound::ExceptionLoadNotFound() throw()
+        :   AbstractVM_Exception("Abort: Load on non existant value") {}
+
+ExceptionLoadNotFound::~ExceptionLoadNotFound() throw() {}
+
 ExceptionFailedAssert::ExceptionFailedAssert() throw()
         : AbstractVM_Exception("Abort: Assert has failed") {}
 

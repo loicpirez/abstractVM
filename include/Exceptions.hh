@@ -30,6 +30,13 @@ private:
     const char *str;
 };
 
+class ExceptionLoadNotFound : public AbstractVM_Exception {
+public:
+    ExceptionLoadNotFound() throw();
+
+    virtual ~ExceptionLoadNotFound() throw();
+};
+
 class ExceptionFile : public AbstractVM_Exception {
 public:
     ExceptionFile() throw();
