@@ -43,7 +43,7 @@ int Int8::getPrecision() const {
 std::string Int8::toString() const {
     std::ostringstream tmp;
 
-    tmp << (int) operand;
+    tmp << static_cast<int> (operand);
     return (tmp.str());
 }
 
@@ -65,7 +65,7 @@ IOperand *Int8::operator-(const IOperand &rhs) const {
   if (rhs.getType() > this->getType())
     return (rhs - *this);
   std::ostringstream tmp;
-  int result = this->operand - (char)(stoi(rhs.toString()));
+  int result = this->operand - static_cast<char> ((stoi(rhs.toString())));
 
   tmp << result;
   return (new Int8(tmp.str()));
@@ -85,7 +85,7 @@ IOperand *Int8::operator/(const IOperand &rhs) const {
     std::ostringstream tmp;
 
     try {
-        if ((int) this->operand == 0)
+        if ((static_cast<int> (this->operand == 0)))
             throw new ExceptionZero;
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
@@ -99,7 +99,7 @@ IOperand *Int8::operator%(const IOperand &rhs) const {
     std::ostringstream tmp;
 
     try {
-        if ((int) this->operand == 0)
+        if ((static_cast<int> (this->operand == 0)))
             throw new ExceptionZero;
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();

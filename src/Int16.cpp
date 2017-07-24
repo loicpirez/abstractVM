@@ -43,7 +43,7 @@ int Int16::getPrecision() const {
 std::string Int16::toString() const {
     std::ostringstream tmp;
 
-    tmp << (int) operand;
+    tmp << static_cast<int> (operand);
     return (tmp.str());
 }
 
@@ -85,7 +85,7 @@ IOperand *Int16::operator/(const IOperand &rhs) const {
     std::ostringstream tmp;
 
     try {
-        if ((int) this->operand == 0)
+        if (static_cast<int> (this->operand == 0))
             throw new ExceptionZero;
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
@@ -99,7 +99,7 @@ IOperand *Int16::operator%(const IOperand &rhs) const {
     std::ostringstream tmp;
 
     try {
-        if ((int) this->operand == 0)
+        if (static_cast<int> (this->operand == 0))
             throw new ExceptionZero;
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();

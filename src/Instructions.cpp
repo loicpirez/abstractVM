@@ -165,7 +165,7 @@ std::list<IOperand *> Instructions::print(std::list<IOperand *> stack) {
         IOperand *c = stack.front();
         if (c->getType() != eOperandType::Int8)
             throw new ExceptionOperand;
-        std::cout << (char) stoi(c->toString());
+        std::cout << static_cast<char> (stoi(c->toString()));
         std::cout << std::endl;
     } catch (ExceptionStack *e) {
         e->printErrorFinish();

@@ -55,7 +55,7 @@ IOperand *Int32::operator+(const IOperand &rhs) const {
   if (rhs.getType() > this->getType())
     return (rhs + *this);
   std::ostringstream tmp;
-  int result = (int) (stoi(rhs.toString()) + this->operand);
+  int result = static_cast<int> (stoi(rhs.toString()) + this->operand);
 
   tmp << result;
   return (new Int32(tmp.str()));
@@ -75,7 +75,7 @@ IOperand *Int32::operator*(const IOperand &rhs) const {
   if (rhs.getType() > this->getType())
     return (rhs * *this);
   std::ostringstream tmp;
-  int result = (int) (stoi(rhs.toString()) * this->operand);
+  int result = static_cast<int> ((stoi(rhs.toString()) * this->operand));
 
   tmp << result;
   return (new Int32(tmp.str()));
@@ -85,7 +85,7 @@ IOperand *Int32::operator/(const IOperand &rhs) const {
     std::ostringstream tmp;
 
     try {
-        if ((int) this->operand == 0)
+        if (static_cast<int> (this->operand == 0))
             throw new ExceptionZero;
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
@@ -99,7 +99,7 @@ IOperand *Int32::operator%(const IOperand &rhs) const {
     std::ostringstream tmp;
 
     try {
-        if ((int) this->operand == 0)
+        if (static_cast<int> (this->operand == 0))
             throw new ExceptionZero;
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
