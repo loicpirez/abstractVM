@@ -33,9 +33,8 @@ Float::Float(const std::string &data) {
     } catch (const ExceptionUnderflow *e) {
         e->printErrorFinish();
     }
-    this->precision = (int) (data.substr(data.find(".") + 1).length());
-    if (this->precision > 3)
-        this->precision = 3;
+    if (data.find(".") != std::string::npos)
+        this->precision = this->precision > 3 ? 3 : (int) (data.substr(data.find(".") + 1).length());
     this->operand = tmp;
 }
 

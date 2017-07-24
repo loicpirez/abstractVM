@@ -32,9 +32,8 @@ Double::Double(const std::string &data) {
     } catch (const ExceptionUnderflow *e) {
         e->printErrorFinish();
     }
-    this->precision = (int) (data.substr(data.find(".") + 1).length());
-    if (this->precision > 7)
-        this->precision = 7;
+    if (data.find(".") != std::string::npos)
+        this->precision = this->precision > 7 ? 7 : (int) (data.substr(data.find(".") + 1).length());
     this->operand = tmp;
 }
 
