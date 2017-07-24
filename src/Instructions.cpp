@@ -265,8 +265,16 @@ std::list<IOperand *> Instructions::push(std::list<IOperand *> stack, eOperandTy
 }
 
 std::list<IOperand *> Instructions::assert(std::list<IOperand *> stack, eOperandType type, std::string value) {
-    (void) value;
-    (void) type;
+    (void)type;
+    try {
+        if (stack.size() < 1)
+            throw new ExceptionFailedAssert;
+        IOperand *c = stack.front();
+        if (c->toString().compare(value) != 0)
+            throw new ExceptionFailedAssert;
+    } catch (const ExceptionFailedAssert *e) {
+        e->printErrorFinish();
+    }
     return (stack);
 }
 
