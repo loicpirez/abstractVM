@@ -255,8 +255,27 @@ std::list<IOperand *> Instructions::load(std::list<IOperand *> stack, eOperandTy
 }
 
 std::list<IOperand *> Instructions::store(std::list<IOperand *> stack, eOperandType type, std::string value) {
-    (void) value;
-    (void) type;
+    IOperand *first_value = stack.front();
+    bool found = false;
+    int pos = 0;
+    int index = 0;
+
+    for (auto &t : stack) {
+        if (t) {
+            if (t->getType() == type && t->toString().compare(value) == 0) {
+                found = true;
+                //TODO : change element in the list
+            }
+            index += 1;
+        }
+    }
+    try {
+        if (!found)
+            throw new ExceptionStoreNotFound;
+    } catch (ExceptionStoreNotFound *e) {
+        e->printErrorFinish();
+    }
+    checkNumberCalc(stack);
     return (stack);
 }
 

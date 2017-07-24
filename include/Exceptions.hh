@@ -37,6 +37,14 @@ public:
     virtual ~ExceptionLoadNotFound() throw();
 };
 
+class ExceptionStoreNotFound : public AbstractVM_Exception {
+public:
+    ExceptionStoreNotFound() throw();
+
+    virtual ~ExceptionStoreNotFound() throw();
+};
+
+
 class ExceptionFile : public AbstractVM_Exception {
 public:
     ExceptionFile() throw();
