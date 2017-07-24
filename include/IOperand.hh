@@ -38,7 +38,7 @@ public:
     virtual ~IOperand() {};
 
 protected:
-    int precision;
+    int precision = 0;
 };
 
 #endif          /* !IOPERAND_HH_ */
