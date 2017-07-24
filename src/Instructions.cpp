@@ -276,6 +276,8 @@ std::list<IOperand *> Instructions::store(std::list<IOperand *> stack, eOperandT
         e->printErrorFinish();
     }
     checkNumberCalc(stack);
+    (void)first_value;
+    (void)pos;
     return (stack);
 }
 
