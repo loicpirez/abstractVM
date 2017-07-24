@@ -39,7 +39,9 @@ Float::~Float() {}
 
 std::string Float::toString() const {
     std::ostringstream tmp;
+    std::cout.precision(4);
 
+    tmp << std::fixed;
     tmp << operand;
     return (tmp.str());
 }
