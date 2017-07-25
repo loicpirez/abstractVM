@@ -29,10 +29,10 @@ void AbstractVM_Exception::printErrorFinish() const {
 }
 
 ExceptionLoadNotFound::ExceptionLoadNotFound() throw()
-        :   AbstractVM_Exception("Abort: Load on non existant value") {}
+        : AbstractVM_Exception("Abort: Load on non existant value") {}
 
 ExceptionStoreNotFound::ExceptionStoreNotFound() throw()
-        :   AbstractVM_Exception("Abort: Store on non existant value") {}
+        : AbstractVM_Exception("Abort: Store on non existant value") {}
 
 ExceptionStoreNotFound::~ExceptionStoreNotFound() throw() {}
 

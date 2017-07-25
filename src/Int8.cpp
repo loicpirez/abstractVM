@@ -52,33 +52,33 @@ eOperandType Int8::getType() const {
 }
 
 IOperand *Int8::operator+(const IOperand &rhs) const {
-  if (rhs.getType() > this->getType())
-    return (rhs + *this);
-  std::ostringstream tmp;
-  int result = static_cast<char>(stoi(rhs.toString()) + this->operand);
+    if (rhs.getType() > this->getType())
+        return (rhs + *this);
+    std::ostringstream tmp;
+    int result = static_cast<char>(stoi(rhs.toString()) + this->operand);
 
-  tmp << result;
-  return (new Int8(tmp.str()));
+    tmp << result;
+    return (new Int8(tmp.str()));
 }
 
 IOperand *Int8::operator-(const IOperand &rhs) const {
-  if (rhs.getType() > this->getType())
-    return (rhs - *this);
-  std::ostringstream tmp;
-  int result = this->operand - static_cast<char> ((stoi(rhs.toString())));
+    if (rhs.getType() > this->getType())
+        return (rhs - *this);
+    std::ostringstream tmp;
+    int result = this->operand - static_cast<char> ((stoi(rhs.toString())));
 
-  tmp << result;
-  return (new Int8(tmp.str()));
+    tmp << result;
+    return (new Int8(tmp.str()));
 }
 
 IOperand *Int8::operator*(const IOperand &rhs) const {
-  if (rhs.getType() > this->getType())
-    return (rhs * *this);
-  std::ostringstream tmp;
-  int result = static_cast<char>(stoi(rhs.toString()) * this->operand);
+    if (rhs.getType() > this->getType())
+        return (rhs * *this);
+    std::ostringstream tmp;
+    int result = static_cast<char>(stoi(rhs.toString()) * this->operand);
 
-  tmp << result;
-  return (new Int8(tmp.str()));
+    tmp << result;
+    return (new Int8(tmp.str()));
 }
 
 IOperand *Int8::operator/(const IOperand &rhs) const {
