@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Sat Jul 22 17:14:27 2017 Julien Leleu
-// Last update Mon Jul 24 14:40:43 2017 Julien Leleu
+// Last update Tue Jul 25 16:45:58 2017 Julien Leleu
 //
 
 #include <algorithm>
@@ -13,7 +13,6 @@
 #include <Execution.hpp>
 #include "Exceptions.hh"
 #include <Factory.hpp>
-#include <memory>
 
 
 std::list<IOperand *> Instructions::pop(std::list<IOperand *> stack) {
@@ -57,7 +56,7 @@ std::list<IOperand *> Instructions::swap(std::list<IOperand *> stack) {
 }
 
 std::list<IOperand *> Instructions::dump(std::list<IOperand *> stack) {
-    for (IOperand * &t : stack) {
+    for (IOperand *&t : stack) {
         if (t) {
             std::cout << t->toString() << std::endl;
             fflush(0);
@@ -240,13 +239,23 @@ Instructions::createFunctionPointerSingleType() {
 
 std::list<IOperand *> Instructions::load(std::list<IOperand *> stack, eOperandType type, std::string value) {
     bool found = false;
+    int i = 0;
+    int v = std::stoi(value);
+    IOperand *tmp;
 
-    for (IOperand * &t : stack) {
-        if (t->getType() == type && t->toString().compare(value) == 0) {
-            IOperand *tmp = Factory::createOperand(type, value);
+    for (IOperand *&t : stack) {
+        if (i == v && t->getType() == type) {
+            tmp = t;
+            for (std::list<IOperand *>::iterator iter = stack.begin(); iter != stack.end(); iter++) {
+                if ((*iter)->toString().compare(t->toString()) == 0 && (*iter)->getType() == t->getType()) {
+                    stack.erase(iter);
+                    break;
+                }
+            }
             stack.push_front(tmp);
             found = true;
         }
+        i++;
     }
     try {
         if (!found)
@@ -258,25 +267,24 @@ std::list<IOperand *> Instructions::load(std::list<IOperand *> stack, eOperandTy
 }
 
 std::list<IOperand *> Instructions::store(std::list<IOperand *> stack, eOperandType type, std::string value) {
-    IOperand *first_value = stack.front();
-    std::list<IOperand *>::iterator it;
+    int i = 0;
+    int v = std::stoi(value);
     bool found = false;
 
-    for (it = stack.begin(); it != stack.end(); it++) {
-        if ((*it)->getType() == type && (*it)->toString().compare(value) == 0) {
+    for (std::list<IOperand *>::iterator iter = stack.begin(); iter != stack.end(); iter++) {
+        if (i == v && !found) {
+            stack.insert(iter, Factory::createOperand(type, (*stack.begin())->toString()));
             found = true;
-            stack.pop_front();
-            IOperand *new_element = Factory::createOperand(first_value->getType(), first_value->toString());
-            (*it) = new_element;
         }
+        i++;
     }
+    stack.pop_front();
     try {
         if (!found)
             throw new ExceptionStoreNotFound;
     } catch (ExceptionStoreNotFound *e) {
         e->printErrorFinish();
     }
-    checkNumberCalc(stack);
     return (stack);
 }
 

@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Fri Jul 21 17:58:43 2017 Julien Leleu
-// Last update Sun Jul 23 21:53:20 2017 Loïc Pirez
+// Last update Tue Jul 25 17:24:47 2017 Julien Leleu
 //
 
 #include <string>
@@ -20,7 +20,7 @@
 
 BigDecimal::BigDecimal(const std::string &data) {
     long double tmp = stold(data);
-
+    
     try {
         if (tmp > std::numeric_limits<long double>::max())
             throw new ExceptionOverflow;
@@ -83,7 +83,47 @@ IOperand *BigDecimal::operator+(const IOperand &rhs) const {
 }
 
 IOperand *BigDecimal::operator-(const IOperand &rhs) const {
-    return (new BigDecimal(rhs.toString()));
+    std::string a = this->toString();
+    std::string b = rhs.toString();
+    std::string::reverse_iterator rit_1 = a.rbegin();
+    std::string::reverse_iterator rit_2 = b.rbegin();
+    std::string c;
+
+    bool carry = false;
+    while (rit_1 != a.rend() && rit_2 != b.rend()) {
+        int a1 = *rit_1 - '0';
+        int b1 = *rit_2 - '0';
+        if (carry) {
+            b1 += 1;
+        }
+        if (a1 < b1) {
+            a1 += 10;
+            carry = true;
+        } else {
+            carry = false;
+        }
+        c += (a1 - b1) + '0';
+        rit_1++;
+        rit_2++;
+    }
+    if (rit_1 != a.rend()) {
+        do {
+            int a1 = *rit_1 - '0';
+            int b1 = carry ? 1 : 0;
+            if (a1 < b1) {
+                a1 += 10;
+                carry = true;
+            } else {
+                carry = false;
+            }
+            c += (a1 - b1) + '0';
+            rit_1++;
+        } while (rit_1 != a.rend());
+    }
+    std::reverse(c.begin(), c.end());
+    while (c.at(0) == '0')
+      c.erase(0, 1);
+    return (new BigDecimal(c));
 }
 
 IOperand *BigDecimal::operator*(const IOperand &rhs) const {
