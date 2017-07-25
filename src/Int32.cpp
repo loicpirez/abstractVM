@@ -52,33 +52,33 @@ eOperandType Int32::getType() const {
 }
 
 IOperand *Int32::operator+(const IOperand &rhs) const {
-  if (rhs.getType() > this->getType())
-    return (rhs + *this);
-  std::ostringstream tmp;
-  int result = static_cast<int> (stoi(rhs.toString()) + this->operand);
+    if (rhs.getType() > this->getType())
+        return (rhs + *this);
+    std::ostringstream tmp;
+    int result = static_cast<int> (stoi(rhs.toString()) + this->operand);
 
-  tmp << result;
-  return (new Int32(tmp.str()));
+    tmp << result;
+    return (new Int32(tmp.str()));
 }
 
 IOperand *Int32::operator-(const IOperand &rhs) const {
-  if (rhs.getType() > this->getType())
-    return (rhs - *this);
-  std::ostringstream tmp;
-  int result = this->operand - stoi(rhs.toString());
+    if (rhs.getType() > this->getType())
+        return (rhs - *this);
+    std::ostringstream tmp;
+    int result = this->operand - stoi(rhs.toString());
 
-  tmp << result;
-  return (new Int32(tmp.str()));
+    tmp << result;
+    return (new Int32(tmp.str()));
 }
 
 IOperand *Int32::operator*(const IOperand &rhs) const {
-  if (rhs.getType() > this->getType())
-    return (rhs * *this);
-  std::ostringstream tmp;
-  int result = static_cast<int> ((stoi(rhs.toString()) * this->operand));
+    if (rhs.getType() > this->getType())
+        return (rhs * *this);
+    std::ostringstream tmp;
+    int result = static_cast<int> ((stoi(rhs.toString()) * this->operand));
 
-  tmp << result;
-  return (new Int32(tmp.str()));
+    tmp << result;
+    return (new Int32(tmp.str()));
 }
 
 IOperand *Int32::operator/(const IOperand &rhs) const {

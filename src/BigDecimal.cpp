@@ -48,10 +48,8 @@ eOperandType BigDecimal::getType() const {
     return (eOperandType::BigDecimal);
 }
 
-void BigDecimal::findReplace(std::string& source, std::string const& find, std::string const& replace) const
-{
-    for(std::string::size_type i = 0; (i = source.find(find, i)) != std::string::npos;)
-    {
+void BigDecimal::findReplace(std::string &source, std::string const &find, std::string const &replace) const {
+    for (std::string::size_type i = 0; (i = source.find(find, i)) != std::string::npos;) {
         source.replace(i, find.length(), replace);
         i += replace.length();
     }
@@ -85,45 +83,17 @@ IOperand *BigDecimal::operator+(const IOperand &rhs) const {
 }
 
 IOperand *BigDecimal::operator-(const IOperand &rhs) const {
-/*    std::ostringstream tmp;
-    long double result = stold(rhs.toString()) - this->operand;
-
-    tmp << result;*/
     return (new BigDecimal(rhs.toString()));
 }
 
 IOperand *BigDecimal::operator*(const IOperand &rhs) const {
-/*    std::ostringstream tmp;
-    long double result = stold(rhs.toString()) * this->operand;
-
-    tmp << result;*/
     return (new BigDecimal(rhs.toString()));
 }
 
 IOperand *BigDecimal::operator/(const IOperand &rhs) const {
-/*    std::ostringstream tmp;
-
-    try {
-        if (this->operand == 0)
-            throw new ExceptionZero;
-    } catch (const ExceptionZero *e) {
-        e->printErrorFinish();
-    }
-    long double result = stold(rhs.toString()) / this->operand;
-    tmp << result;*/
     return (new BigDecimal(rhs.toString()));
 }
 
 IOperand *BigDecimal::operator%(const IOperand &rhs) const {
-    std::ostringstream tmp;
-
-/*    try {
-        if (this->operand == 0)
-            throw new ExceptionZero;
-    } catch (const ExceptionZero *e) {
-        e->printErrorFinish();
-    }
-    long double result = fmodl(stold(rhs.toString()), this->operand);
-    tmp << result;*/
     return (new BigDecimal(rhs.toString()));
 }

@@ -259,7 +259,6 @@ std::list<IOperand *> Instructions::store(std::list<IOperand *> stack, eOperandT
     IOperand *first_value = stack.front();
     std::list<IOperand *>::iterator it;
     bool found = false;
-    int pos = 0;
 
     for (it = stack.begin(); it != stack.end(); it++) {
         if ((*it)->getType() == type && (*it)->toString().compare(value) == 0) {

@@ -35,7 +35,7 @@ public:
 
     int getPrecision() const;
 
-    void findReplace(std::string& source, std::string const& find, std::string const& replace) const;
+    void findReplace(std::string &source, std::string const &find, std::string const &replace) const;
 
 protected:
     std::string operand;
