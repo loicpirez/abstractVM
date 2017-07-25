@@ -35,8 +35,10 @@ public:
 
     int getPrecision() const;
 
+    void findReplace(std::string& source, std::string const& find, std::string const& replace) const;
+
 protected:
-    long double operand;
+    std::string operand;
 };
 
 #endif          /* !BIGDECIMAL_HH_ */

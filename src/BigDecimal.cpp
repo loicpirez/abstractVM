@@ -11,12 +11,12 @@
 #include <string>
 #include <sstream>
 #include <iostream>
-#include <cfloat>
 #include "Exceptions.hh"
 #include "BigDecimal.hh"
 #include <cmath>
 #include <limits>
 #include <iomanip>
+#include <algorithm>
 
 BigDecimal::BigDecimal(const std::string &data) {
     long double tmp = stold(data);
@@ -33,7 +33,7 @@ BigDecimal::BigDecimal(const std::string &data) {
     }
     if (data.find(".") != std::string::npos)
         this->precision = this->precision > 200 ? 200 : static_cast<int> (data.substr(data.find(".") + 1).length());
-    this->operand = tmp;
+    this->operand = data;
 }
 
 BigDecimal::~BigDecimal() {}
@@ -48,32 +48,60 @@ eOperandType BigDecimal::getType() const {
     return (eOperandType::BigDecimal);
 }
 
-IOperand *BigDecimal::operator+(const IOperand &rhs) const {
-    std::ostringstream tmp;
-    long double result = stold(rhs.toString()) + this->operand;
+void BigDecimal::findReplace(std::string& source, std::string const& find, std::string const& replace) const
+{
+    for(std::string::size_type i = 0; (i = source.find(find, i)) != std::string::npos;)
+    {
+        source.replace(i, find.length(), replace);
+        i += replace.length();
+    }
+}
 
-    tmp << result;
-    return (new BigDecimal(tmp.str()));
+IOperand *BigDecimal::operator+(const IOperand &rhs) const {
+    std::string first_operand = this->toString();
+    std::string second_operand = rhs.toString();
+
+    if (first_operand.size() < second_operand.size())
+        std::swap(first_operand, second_operand);
+
+    int j = (int) (first_operand.size() - 1);
+    for (int i = (int) (second_operand.size() - 1); i >= 0; i--, j--)
+        first_operand[j] += (second_operand[i] - '0');
+    for (int i = (int) (first_operand.size() - 1); i > 0; i--)
+        if (first_operand[i] > '9') {
+            int d = first_operand[i] - '0';
+            first_operand[i - 1] = (char) (((first_operand[i - 1] - '0') + d / 10) + '0');
+            first_operand[i] = (char) ((d % 10) + '0');
+        }
+    if (first_operand[0] > '9') {
+        std::string k;
+        k += first_operand[0];
+        first_operand[0] = (char) (((first_operand[0] - '0') % 10) + '0');
+        k[0] = (char) (((k[0] - '0') / 10) + '0');
+        first_operand = k + first_operand;
+    }
+    findReplace(first_operand, ",", ".");
+    return new BigDecimal(first_operand);
 }
 
 IOperand *BigDecimal::operator-(const IOperand &rhs) const {
-    std::ostringstream tmp;
+/*    std::ostringstream tmp;
     long double result = stold(rhs.toString()) - this->operand;
 
-    tmp << result;
-    return (new BigDecimal(tmp.str()));
+    tmp << result;*/
+    return (new BigDecimal(rhs.toString()));
 }
 
 IOperand *BigDecimal::operator*(const IOperand &rhs) const {
-    std::ostringstream tmp;
+/*    std::ostringstream tmp;
     long double result = stold(rhs.toString()) * this->operand;
 
-    tmp << result;
-    return (new BigDecimal(tmp.str()));
+    tmp << result;*/
+    return (new BigDecimal(rhs.toString()));
 }
 
 IOperand *BigDecimal::operator/(const IOperand &rhs) const {
-    std::ostringstream tmp;
+/*    std::ostringstream tmp;
 
     try {
         if (this->operand == 0)
@@ -82,22 +110,20 @@ IOperand *BigDecimal::operator/(const IOperand &rhs) const {
         e->printErrorFinish();
     }
     long double result = stold(rhs.toString()) / this->operand;
-    tmp << result;
-    return (new BigDecimal(tmp.str()));
+    tmp << result;*/
+    return (new BigDecimal(rhs.toString()));
 }
-
-// 1.23123123120319230129310239103812931293812398123
 
 IOperand *BigDecimal::operator%(const IOperand &rhs) const {
     std::ostringstream tmp;
 
-    try {
+/*    try {
         if (this->operand == 0)
             throw new ExceptionZero;
     } catch (const ExceptionZero *e) {
         e->printErrorFinish();
     }
     long double result = fmodl(stold(rhs.toString()), this->operand);
-    tmp << result;
-    return (new BigDecimal(tmp.str()));
+    tmp << result;*/
+    return (new BigDecimal(rhs.toString()));
 }
