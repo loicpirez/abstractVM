@@ -239,10 +239,11 @@ std::list<IOperand *> Instructions::load(std::list<IOperand *> stack, eOperandTy
     bool found = false;
 
     for (auto &t : stack) {
-        if (t) {
-            if (t->getType() == type && t->toString().compare(value) == 0)
-                found = true;
-            fflush(0);
+        if (t->getType() == type && t->toString().compare(value) == 0) {
+            IOperand *tmp = Factory::createOperand(type, value);
+            stack.pop_front();
+            stack.push_front(tmp);
+            found = true;
         }
     }
     try {
@@ -256,17 +257,15 @@ std::list<IOperand *> Instructions::load(std::list<IOperand *> stack, eOperandTy
 
 std::list<IOperand *> Instructions::store(std::list<IOperand *> stack, eOperandType type, std::string value) {
     IOperand *first_value = stack.front();
+    std::list<IOperand *>::iterator it;
     bool found = false;
     int pos = 0;
-    int index = 0;
 
-    for (auto &t : stack) {
-        if (t) {
-            if (t->getType() == type && t->toString().compare(value) == 0) {
-                found = true;
-                //TODO : change element in the list
-            }
-            index += 1;
+    for (it = stack.begin(); it != stack.end(); it++) {
+        if ((*it)->getType() == type && (*it)->toString().compare(value) == 0) {
+            found = true;
+            IOperand *new_element = Factory::createOperand(first_value->getType(), first_value->toString());
+            (*it) = new_element;
         }
     }
     try {
@@ -276,8 +275,6 @@ std::list<IOperand *> Instructions::store(std::list<IOperand *> stack, eOperandT
         e->printErrorFinish();
     }
     checkNumberCalc(stack);
-    (void)first_value;
-    (void)pos;
     return (stack);
 }
 
