@@ -8,10 +8,13 @@
 // Last update Mon Jul 24 14:40:43 2017 Julien Leleu
 //
 
+#include <algorithm>
 #include <iostream>
 #include <Execution.hpp>
 #include "Exceptions.hh"
 #include <Factory.hpp>
+#include <memory>
+
 
 std::list<IOperand *> Instructions::pop(std::list<IOperand *> stack) {
     try {
@@ -44,8 +47,8 @@ std::list<IOperand *> Instructions::swap(std::list<IOperand *> stack) {
     try {
         if (stack.size() < 2)
             throw new ExceptionStack;
-        auto it2 = stack.begin();
-        auto it1 = it2++;
+        std::list<IOperand *>::iterator it2 = stack.begin();
+        std::list<IOperand *>::iterator it1 = it2++;
         std::swap(*it1, *it2);
     } catch (const ExceptionStack *e) {
         e->printErrorFinish();
@@ -54,7 +57,7 @@ std::list<IOperand *> Instructions::swap(std::list<IOperand *> stack) {
 }
 
 std::list<IOperand *> Instructions::dump(std::list<IOperand *> stack) {
-    for (auto &t : stack) {
+    for (IOperand * &t : stack) {
         if (t) {
             std::cout << t->toString() << std::endl;
             fflush(0);
@@ -238,7 +241,7 @@ Instructions::createFunctionPointerSingleType() {
 std::list<IOperand *> Instructions::load(std::list<IOperand *> stack, eOperandType type, std::string value) {
     bool found = false;
 
-    for (auto &t : stack) {
+    for (IOperand * &t : stack) {
         if (t->getType() == type && t->toString().compare(value) == 0) {
             IOperand *tmp = Factory::createOperand(type, value);
             stack.pop_front();

@@ -37,7 +37,7 @@ std::string Parser::checkLine(std::string line) {
     line.erase(new_end, line.end());
     if (line.at(0) == ' ')
         line.erase(0, 1);
-    auto pos = line.rfind(';');
+    unsigned long pos = line.rfind(';');
     if (pos != std::string::npos)
         line.erase(pos);
     if (line.size() == 0)

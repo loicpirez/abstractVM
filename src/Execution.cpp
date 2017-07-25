@@ -69,7 +69,7 @@ void Execution::extractInformationsFromLine(std::string line) {
 }
 
 void Execution::executionFromInput(std::list<std::string> input) {
-    for (auto &line : input) {
+    for (std::string &line : input) {
         extractInformationsFromLine(line);
     }
 }
