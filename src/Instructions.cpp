@@ -244,7 +244,6 @@ std::list<IOperand *> Instructions::load(std::list<IOperand *> stack, eOperandTy
     for (IOperand * &t : stack) {
         if (t->getType() == type && t->toString().compare(value) == 0) {
             IOperand *tmp = Factory::createOperand(type, value);
-            stack.pop_front();
             stack.push_front(tmp);
             found = true;
         }
@@ -266,6 +265,7 @@ std::list<IOperand *> Instructions::store(std::list<IOperand *> stack, eOperandT
     for (it = stack.begin(); it != stack.end(); it++) {
         if ((*it)->getType() == type && (*it)->toString().compare(value) == 0) {
             found = true;
+            stack.pop_front();
             IOperand *new_element = Factory::createOperand(first_value->getType(), first_value->toString());
             (*it) = new_element;
         }
