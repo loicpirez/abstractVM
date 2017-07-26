@@ -26,13 +26,13 @@ public:
 
     ~Parser() {};
 
-    std::string checkLine(std::string line);
+    std::string checkLine(std::string &line);
 
     std::list<std::string> readContentFromStandardInput();
 
     std::list<std::string> readContentFromFile();
 
-    std::string getInput(std::string str);
+    std::string getInput(std::string &str);
 
 private:
     bool source_is_file_descriptor;
