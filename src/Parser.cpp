@@ -28,7 +28,7 @@ bool testSpaces(char lhs, char rhs) {
     return (lhs == rhs) && (lhs == ' ');
 }
 
-std::string Parser::checkLine(std::string line) {
+std::string Parser::checkLine(std::string &line) {
     std::replace(line.begin(), line.end(), '\t', ' ');
     std::string::iterator new_end;
     std::string empty = "";
@@ -49,7 +49,7 @@ std::string Parser::checkLine(std::string line) {
     return (line);
 }
 
-std::string Parser::getInput(std::string str) {
+std::string Parser::getInput(std::string &str) {
     std::transform(str.begin(), str.end(), str.begin(), tolower);
     std::string empty = "";
 
