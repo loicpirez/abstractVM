@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Sat Jul 22 17:14:27 2017 Julien Leleu
-// Last update Tue Jul 25 16:45:58 2017 Julien Leleu
+// Last update Wed Jul 26 15:41:36 2017 Julien Leleu
 //
 
 #include <algorithm>
@@ -131,12 +131,16 @@ std::list<IOperand *> Instructions::div(std::list<IOperand *> stack) {
         stack.pop_front();
         IOperand *k = stack.front();
         stack.pop_front();
+        if (i->toString() == "0")
+          throw new ExceptionZero;
         IOperand *ret = *k / *i;
         stack.push_front(ret);
         delete i;
         delete k;
     } catch (ExceptionStack *e) {
         e->printErrorFinish();
+    } catch (ExceptionZero *e) {
+      e->printErrorFinish();
     }
     return (stack);
 }
@@ -150,12 +154,16 @@ std::list<IOperand *> Instructions::mod(std::list<IOperand *> stack) {
         stack.pop_front();
         IOperand *k = stack.front();
         stack.pop_front();
+        if (i->toString() == "0")
+          throw new ExceptionZero;
         IOperand *ret = *k % *i;
         stack.push_front(ret);
         delete i;
         delete k;
     } catch (ExceptionStack *e) {
         e->printErrorFinish();
+    } catch (ExceptionZero *e) {
+      e->printErrorFinish();
     }
     return (stack);
 }
