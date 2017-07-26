@@ -5,7 +5,7 @@
 // Login   <loic.pirez@epitech.eu>
 //
 // Started on  Sat Jul 22 16:36:13 2017 Loïc Pirez
-// Last update Wed Jul 26 16:34:23 2017 Julien Leleu
+// Last update Wed Jul 26 16:42:40 2017 Julien Leleu
 //
 
 #include <IOperand.hh>
@@ -25,7 +25,7 @@ std::map<std::string, eOperandType> Execution::createOperandPointer() {
     };
 }
 
-void Execution::executeDoubleInstruction(Instructions *i, std::smatch match) {
+void Execution::executeDoubleInstruction(Instructions *i, const std::smatch &match) {
     std::string instruction = match[2];
     std::string number = match[4];
     std::string type = match[3];
@@ -37,7 +37,7 @@ void Execution::executeDoubleInstruction(Instructions *i, std::smatch match) {
     this->stack = function_pointer.at(instruction)(this->stack, createOperandPointer().at(type), number);
 }
 
-void Execution::executeSimpleInstruction(Instructions *i, std::string line) {
+void Execution::executeSimpleInstruction(Instructions *i, const std::string &line) {
     std::string instruction = line;
 
     std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>&)>> function_pointer =
@@ -45,7 +45,7 @@ void Execution::executeSimpleInstruction(Instructions *i, std::string line) {
     this->stack = function_pointer.at(instruction)(this->stack);
 }
 
-void Execution::extractInformationsFromLine(std::string line) {
+void Execution::extractInformationsFromLine(const std::string &line) {
     Instructions *i = new Instructions;
     std::regex s("(pop|clear|dup|swap|dump|add|sub|mul|div|mod|print|exit)");
     std::regex v(

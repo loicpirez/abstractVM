@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Fri Jul 21 17:55:45 2017 Julien Leleu
-// Last update Sun Jul 23 21:50:27 2017 Loïc Pirez
+// Last update Wed Jul 26 16:42:43 2017 Julien Leleu
 //
 
 #ifndef EXECUTION_HH
@@ -27,15 +27,15 @@ public:
 
     void printInstructions();
 
-    void extractInformationsFromLine(std::string line);
+    void extractInformationsFromLine(const std::string &line);
 
     void assert(eOperandType type, std::string line);
 
     void push(eOperandType type, std::string line);
 
-    void executeSimpleInstruction(Instructions *i, std::string line);
+    void executeSimpleInstruction(Instructions *i, const std::string &line);
 
-    void executeDoubleInstruction(Instructions *i, std::smatch match);
+    void executeDoubleInstruction(Instructions *i, const std::smatch &match);
 
     std::map<std::string, eOperandType> createOperandPointer();
 
