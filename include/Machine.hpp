@@ -5,7 +5,7 @@
 // Login   <loic.pirez@epitech.eu>
 //
 // Started on  Thu Jul 20 14:16:05 2017 Loïc Pirez
-// Last update Sun Jul 23 21:50:43 2017 Loïc Pirez
+// Last update Wed Jul 26 16:17:31 2017 Julien Leleu
 //
 
 #ifndef         MACHINE_HH_
@@ -22,9 +22,9 @@ public:
 
     ~Machine() {};
 
-    void Parse(std::string filename);
+    void Parse(const std::string &filename);
 
-    void Parse(int fd);
+    void Parse(const int &fd);
 
     std::list<std::string> getInput();
 
