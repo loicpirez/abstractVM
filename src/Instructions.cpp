@@ -5,7 +5,7 @@
 // Login   <julien.leleu@epitech.eu>
 //
 // Started on  Sat Jul 22 17:14:27 2017 Julien Leleu
-// Last update Wed Jul 26 15:41:36 2017 Julien Leleu
+// Last update Wed Jul 26 16:32:31 2017 Julien Leleu
 //
 
 #include <algorithm>
@@ -15,7 +15,7 @@
 #include <Factory.hpp>
 
 
-std::list<IOperand *> Instructions::pop(std::list<IOperand *> stack) {
+std::list<IOperand *> Instructions::pop(std::list<IOperand *> &stack) {
     try {
         if (stack.size() == 0)
             throw new ExceptionPopEmptyStack;
@@ -26,12 +26,12 @@ std::list<IOperand *> Instructions::pop(std::list<IOperand *> stack) {
     return (stack);
 }
 
-std::list<IOperand *> Instructions::clear(std::list<IOperand *> stack) {
+std::list<IOperand *> Instructions::clear(std::list<IOperand *> &stack) {
     stack.clear();
     return (stack);
 }
 
-std::list<IOperand *> Instructions::dup(std::list<IOperand *> stack) {
+std::list<IOperand *> Instructions::dup(std::list<IOperand *> &stack) {
     try {
         if (stack.size() == 0)
             throw new ExceptionStack;
@@ -42,7 +42,7 @@ std::list<IOperand *> Instructions::dup(std::list<IOperand *> stack) {
     return (stack);
 }
 
-std::list<IOperand *> Instructions::swap(std::list<IOperand *> stack) {
+std::list<IOperand *> Instructions::swap(std::list<IOperand *> &stack) {
     try {
         if (stack.size() < 2)
             throw new ExceptionStack;
@@ -55,7 +55,7 @@ std::list<IOperand *> Instructions::swap(std::list<IOperand *> stack) {
     return (stack);
 }
 
-std::list<IOperand *> Instructions::dump(std::list<IOperand *> stack) {
+std::list<IOperand *> Instructions::dump(std::list<IOperand *> &stack) {
     for (IOperand *&t : stack) {
         if (t) {
             std::cout << t->toString() << std::endl;
@@ -65,7 +65,7 @@ std::list<IOperand *> Instructions::dump(std::list<IOperand *> stack) {
     return (stack);
 }
 
-std::list<IOperand *> Instructions::add(std::list<IOperand *> stack) {
+std::list<IOperand *> Instructions::add(std::list<IOperand *> &stack) {
     try {
         checkNumberCalc(stack);
         if (stack.size() < 2)
@@ -84,7 +84,7 @@ std::list<IOperand *> Instructions::add(std::list<IOperand *> stack) {
     return (stack);
 }
 
-std::list<IOperand *> Instructions::sub(std::list<IOperand *> stack) {
+std::list<IOperand *> Instructions::sub(std::list<IOperand *> &stack) {
     try {
         checkNumberCalc(stack);
         if (stack.size() < 2)
@@ -103,7 +103,7 @@ std::list<IOperand *> Instructions::sub(std::list<IOperand *> stack) {
     return (stack);
 }
 
-std::list<IOperand *> Instructions::mul(std::list<IOperand *> stack) {
+std::list<IOperand *> Instructions::mul(std::list<IOperand *> &stack) {
     try {
         checkNumberCalc(stack);
         if (stack.size() < 2)
@@ -122,7 +122,7 @@ std::list<IOperand *> Instructions::mul(std::list<IOperand *> stack) {
     return (stack);
 }
 
-std::list<IOperand *> Instructions::div(std::list<IOperand *> stack) {
+std::list<IOperand *> Instructions::div(std::list<IOperand *> &stack) {
     try {
         checkNumberCalc(stack);
         if (stack.size() < 2)
@@ -145,7 +145,7 @@ std::list<IOperand *> Instructions::div(std::list<IOperand *> stack) {
     return (stack);
 }
 
-std::list<IOperand *> Instructions::mod(std::list<IOperand *> stack) {
+std::list<IOperand *> Instructions::mod(std::list<IOperand *> &stack) {
     try {
         checkNumberCalc(stack);
         if (stack.size() < 2)
@@ -168,7 +168,7 @@ std::list<IOperand *> Instructions::mod(std::list<IOperand *> stack) {
     return (stack);
 }
 
-std::list<IOperand *> Instructions::print(std::list<IOperand *> stack) {
+std::list<IOperand *> Instructions::print(std::list<IOperand *> &stack) {
     try {
         if (stack.size() < 1)
             throw new ExceptionStack;
@@ -185,12 +185,12 @@ std::list<IOperand *> Instructions::print(std::list<IOperand *> stack) {
     return (stack);
 }
 
-std::list<IOperand *> Instructions::exit(std::list<IOperand *> stack) {
+std::list<IOperand *> Instructions::exit(std::list<IOperand *> &stack) {
     std::exit(0);
     (void) stack;
 }
 
-std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>)>>
+std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>&)>>
 Instructions::createFunctionPointerSingleType() {
     return
             {
@@ -245,7 +245,7 @@ Instructions::createFunctionPointerSingleType() {
             };
 }
 
-std::list<IOperand *> Instructions::load(std::list<IOperand *> stack, eOperandType type, std::string value) {
+std::list<IOperand *> Instructions::load(std::list<IOperand *> &stack, eOperandType &type, std::string &value) {
     bool found = false;
     int i = 0;
     int v = std::stoi(value);
@@ -274,7 +274,7 @@ std::list<IOperand *> Instructions::load(std::list<IOperand *> stack, eOperandTy
     return (stack);
 }
 
-std::list<IOperand *> Instructions::store(std::list<IOperand *> stack, eOperandType type, std::string value) {
+std::list<IOperand *> Instructions::store(std::list<IOperand *> &stack, eOperandType &type, std::string &value) {
     int i = 0;
     int v = std::stoi(value);
     bool found = false;
@@ -296,7 +296,7 @@ std::list<IOperand *> Instructions::store(std::list<IOperand *> stack, eOperandT
     return (stack);
 }
 
-std::list<IOperand *> Instructions::push(std::list<IOperand *> stack, eOperandType type, std::string value) {
+std::list<IOperand *> Instructions::push(std::list<IOperand *> &stack, eOperandType &type, std::string &value) {
     (void) value;
     (void) type;
     IOperand *tmp = Factory::createOperand(type, value);
@@ -304,7 +304,7 @@ std::list<IOperand *> Instructions::push(std::list<IOperand *> stack, eOperandTy
     return (stack);
 }
 
-std::list<IOperand *> Instructions::assert(std::list<IOperand *> stack, eOperandType type, std::string value) {
+std::list<IOperand *> Instructions::assert(std::list<IOperand *> &stack, eOperandType &type, std::string &value) {
     (void) type;
     try {
         if (stack.size() < 1)
@@ -318,7 +318,7 @@ std::list<IOperand *> Instructions::assert(std::list<IOperand *> stack, eOperand
     return (stack);
 }
 
-std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>, eOperandType, std::string)>>
+std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>&, eOperandType&, std::string&)>>
 Instructions::createFunctionPointerDoubleType() {
     return
             {
@@ -345,7 +345,7 @@ Instructions::createFunctionPointerDoubleType() {
             };
 }
 
-void Instructions::checkNumberCalc(std::list<IOperand *> stack) {
+void Instructions::checkNumberCalc(std::list<IOperand *> &stack) {
     try {
         if (stack.size() < 2) {
             throw new ExceptionNotEnoughNumber;

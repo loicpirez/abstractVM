@@ -5,7 +5,7 @@
 // Login   <loic.pirez@epitech.eu>
 //
 // Started on  Sat Jul 22 16:36:13 2017 Loïc Pirez
-// Last update Sun Jul 23 21:53:04 2017 Loïc Pirez
+// Last update Wed Jul 26 16:34:23 2017 Julien Leleu
 //
 
 #include <IOperand.hh>
@@ -30,8 +30,8 @@ void Execution::executeDoubleInstruction(Instructions *i, std::smatch match) {
     std::string number = match[4];
     std::string type = match[3];
 
-    std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>, eOperandType,
-                                                              std::string)>> function_pointer = i->createFunctionPointerDoubleType();
+    std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>&, eOperandType&,
+                                                              std::string&)>> function_pointer = i->createFunctionPointerDoubleType();
     std::map<std::string, eOperandType> operand_pointer = createOperandPointer();
 
     this->stack = function_pointer.at(instruction)(this->stack, createOperandPointer().at(type), number);
@@ -40,7 +40,7 @@ void Execution::executeDoubleInstruction(Instructions *i, std::smatch match) {
 void Execution::executeSimpleInstruction(Instructions *i, std::string line) {
     std::string instruction = line;
 
-    std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>)>> function_pointer =
+    std::map<std::string, std::function<std::list<IOperand *>(std::list<IOperand *>&)>> function_pointer =
             i->createFunctionPointerSingleType();
     this->stack = function_pointer.at(instruction)(this->stack);
 }
